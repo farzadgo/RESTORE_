@@ -53,13 +53,12 @@ const Home = () => {
     const fetchData = async () => {
       const response = await fetch('/api')
       const data = await response.json()
-      let langData = data.filter(e => e.lang === lang)
-      let content = langData[0].data
-      setContent(content)
-      setIntro(content.filter(e => e.group === 'intro'))
-      setWhatwho(content.filter(e => e.group === 'what' || e.group === 'who'))
-      setRest(content.filter(e => e.group === 'when' || e.group === 'offer' || e.group === 'apply'))
-      setAbout(content.filter(e => e.group === 'we'))
+      const cont = await data.filter(e => e.lang === lang)[0].data
+      setContent(cont)
+      setIntro(cont.filter(e => e.group === 'intro'))
+      setWhatwho(cont.filter(e => e.group === 'what' || e.group === 'who'))
+      setRest(cont.filter(e => e.group === 'when' || e.group === 'offer' || e.group === 'apply'))
+      setAbout(cont.filter(e => e.group === 'we'))
     }
     fetchData()
 
