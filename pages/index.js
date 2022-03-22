@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
-import { server } from '../config'
+// import { server } from '../config'
 import Menu from '../components/Menu'
 
 
-export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api`)
-  const data = await res.json()
-  return {
-    props: { openCall: data }
-  }
-}
+// export const getStaticProps = async () => {
+//   const res = await fetch(`${server}/api`)
+//   const data = await res.json()
+//   return {
+//     props: { openCall: data }
+//   }
+// }
 
 
-const Home = ({ openCall }) => {  
+const Home = () => {
   
   const [toggle, setToggle] = useState(false)
-  const toggler = () => setToggle(prev => !prev);
+  const toggler = () => setToggle(prev => !prev)
   
   const [content, setContent] = useState('')
   const [lang, setLang] = useState('en')
@@ -24,7 +24,6 @@ const Home = ({ openCall }) => {
   const [whatwho, setWhatwho] = useState('')
   const [rest, setRest] = useState('')
   const [about, setAbout] = useState('')
-  // console.log(content)
 
   const words = {
     en: {
@@ -50,8 +49,11 @@ const Home = ({ openCall }) => {
   }
 
   useEffect(() => {
-    const langData = openCall.filter(e => e.lang === lang)
-    if (langData) {
+
+    const fetchData = async () => {
+      const response = await fetch('/api')
+      const data = await response.json()
+      let langData = data.filter(e => e.lang === lang)
       let content = langData[0].data
       setContent(content)
       setIntro(content.filter(e => e.group === 'intro'))
@@ -59,6 +61,7 @@ const Home = ({ openCall }) => {
       setRest(content.filter(e => e.group === 'when' || e.group === 'offer' || e.group === 'apply'))
       setAbout(content.filter(e => e.group === 'we'))
     }
+    fetchData()
 
     return () => {
       console.log('home unmounted')
