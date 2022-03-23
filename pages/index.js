@@ -31,8 +31,6 @@ const Home = () => {
     dates: '',
     call: ''
   })
-
-  const btnLang = lang === 'de' ? 'EN' : 'DE'
   
   const words = {
     en: {
@@ -91,7 +89,7 @@ const Home = () => {
 
       {toggle && <Menu setToggle={toggler} content={content} lang={lang} />}
 
-      <button onClick={handleLang} className={styles.langbut}>{btnLang}</button>
+      <button onClick={handleLang} className={styles.langbut}>{lang === 'de' ? 'EN' : 'DE'}</button>
 
       <button onClick={toggler} className={styles.menubut}> ☰ </button>
 
