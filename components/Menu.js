@@ -112,7 +112,7 @@ const SocialIcon = ({ item }) => {
         href={item.url}
         aria-label={item.name}
         target="_blank"
-        // rel="noreferrer"
+        rel="noreferrer"
       >
         <TagName {...iconProps}/>
       </a>
