@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
-// import { server } from '../config'
 import Menu from '../components/Menu'
+import { debounce } from '../config/helpers'
 
-
+// import { server } from '../config'
 // export const getStaticProps = async () => {
 //   const res = await fetch(`${server}/api`)
 //   const data = await res.json()
@@ -12,18 +12,20 @@ import Menu from '../components/Menu'
 //   }
 // }
 
-
 const Home = () => {
   
   const [toggle, setToggle] = useState(false)
   const toggler = () => setToggle(prev => !prev)
+  const [width, setWidth] = useState(900)
 
   const [content, setContent] = useState('')
   const [lang, setLang] = useState('en')
+
   const [intro, setIntro] = useState('')
   const [whatwho, setWhatwho] = useState('')
   const [rest, setRest] = useState('')
   const [about, setAbout] = useState('')
+  // console.log(intro)
 
   const [subtitles, setSubtitles] = useState({
     title: '',
@@ -63,6 +65,11 @@ const Home = () => {
     }
   }
 
+  const handleResize = debounce(() => {
+    setWidth(window.innerWidth)
+  }, 1000)
+  // console.log(width)
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('/api')
@@ -79,9 +86,12 @@ const Home = () => {
     setSubtitles({...words.en})
     handleSubtitles()
 
-    // return () => {
-    //   console.log('home unmounted')
-    // }
+    setWidth(window.innerWidth)
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [lang])
 
   return (
@@ -108,20 +118,20 @@ const Home = () => {
           <h3>{subtitles.call}</h3>
         </div>
 
-        <div className={styles.moreone}>
-          {intro && intro.map(e => <Parag content={e} key={e.id}/>)}
+        <div>
+          {intro && intro.map(e => <Parag content={e} key={e.id} width={width}/>)}
         </div>
 
-        <div className={styles.moretwo}>
-          {whatwho && whatwho.map(e => <Parag content={e} key={e.id}/>)}
+        <div>
+          {whatwho && whatwho.map(e => <Parag content={e} key={e.id} width={width}/>)}
         </div>
 
-        <div className={styles.morethree}>
-          {rest && rest.map(e => <Parag content={e} key={e.id}/>)}
+        <div>
+          {rest && rest.map(e => <Parag content={e} key={e.id} width={width}/>)}
         </div>
 
-        <div className={styles.morefour}>
-          {about && about.map(e => <Parag content={e} key={e.id}/>)}
+        <div className={styles.hacersitio}>
+          {about && about.map(e => <Parag content={e} key={e.id} width={width}/>)}
         </div>
 
       </section>
@@ -134,25 +144,62 @@ export default Home
 
 
 
-const Parag = ({ content }) => {
+const Parag = ({ content, width }) => {
+
+  const [cardWidth, setCardWidth] = useState('')
+  const [position, setPosition] = useState('')
+
+  const paragStyle = {
+    width: cardWidth,
+    left: position
+  }  
+
+  useEffect(() => {
+    let offset
+    if (width > 1700) {
+      offset = width * 0.5
+    } else if (width > 1300 && width < 1699) {
+      offset = width * 0.4
+    } else if (width > 900 && width < 1299) {
+      offset = width * 0.3
+    } else {
+      offset = 0
+    }
+    setCardWidth((width - offset) - 15)
+    setPosition((Math.random() * offset))
+
+    // if (width < 600) {
+    //   setCardWidth('100%')
+    //   setPosition('auto')
+    // }
+  
+    // return () => {
+    // }
+  }, [width])
+  
+
+  
   return (
-    <div className={styles.parag} id={content.group}>
+    <div className={styles.parag} style={paragStyle} id={content.group}>
+
       {content.title && <h3>{content.title}</h3>}
-      {content.body.map(e => {
-        let nid = Math.random().toString(36).substring(2, 15)
+
+      {content.body && content.body.map(e => {
+        let idone = Math.random().toString(36).substring(2, 15)
         if (typeof e === 'string') {
-          return <p key={nid}>{e}</p>
+          return <p className={styles.paragprime} key={idone}>{e}</p>
         } else {
-          return <ul key={nid}>{e.map(p => {
-            let mid = Math.random().toString(36).substring(2, 15)
+          return <ul className={styles.paraglist} key={idone}>{e.map(p => {
+            let idtwo = Math.random().toString(36).substring(2, 15)
             if (typeof p === 'string') {
-              return <li key={mid}>{p}</li>
+              return <li key={idtwo}>{p}</li>
             } else {
-              return <ul key={mid}>{p.map((e, i) => <li key={i}>{e}</li>)}</ul>
+              return <ul key={idtwo}>{p.map((e, i) => <li key={i}>{e}</li>)}</ul>
             }
           })}</ul>
         }
       })}
+
     </div>
   )
 }

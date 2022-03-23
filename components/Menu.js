@@ -76,6 +76,9 @@ const Menu = ({ setToggle, content, lang }) => {
 
       <nav className={styles.nav}>
         <ul>
+          <li onClick={handleMenuItem}>
+            <a href='#more'> OPEN CALL </a>
+          </li>
           {content && content.map((e, i) => <li onClick={handleMenuItem} key={i}>
             <a href={`#${e.group}`}>{e.title}</a>
           </li>)}

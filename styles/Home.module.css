@@ -1,180 +1,182 @@
-.landing, .more {
+.landing {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: var(--header-height) 0;
   min-height: 100vh;
-}
-.landing {
-  /* color: #F255FF; */
   color: black;
   justify-content: center;
   background-color: #0000ff;
   user-select: none;
   -webkit-user-select: none;
 }
+.landingprime {
+  width: 66%;
+}
 .landingprime h1 {
   font-weight: 500;
-  font-size: 3.6em;
+  font-size: 8em;
   left: -0.06em;
   position: relative;
 }
 .landingprime h2 {
   font-weight: 600;
-  font-size: 1.3em;
+  font-size: 1.8em;
 }
-.landingprime p, .landingprime a {
+.landingprime p,
+.landingprime a {
   font-weight: 600;
-  font-size: 1.2em;
+  font-size: 1.5em;
   margin-bottom: 1em;
 }
-.landing > *, .more > * {
-  padding: 0 20px;
-}
 
+/* ------------------------------- */
 .more {
-  background-color: rgb(241, 234, 232);
-  background-image: radial-gradient(rgb(192, 192, 192) 1px, transparent 0);
-  /* background-color: blue; */
+  padding: var(--header-height) 0;
+  min-height: 100vh;
+  background-color: #f0ecf1;
+  background-image: radial-gradient(#c8c8c8 1px, transparent 0);
   background-size: 36px 36px;
-  font-size: 1.2em;
-  line-height: 1.4em;
+}
+.more > *  {
+  position: relative;
+  color: #0000ff;
 }
 .moretitle {
-  margin: 0 0 40px 0;
+  margin-bottom: 40px ;
+  padding-left: 2em;
   font-weight: bold;
+  font-size: 2em;
 }
 .parag {
-  margin-bottom: 80px;
-  padding-top: 40px;
+  position: relative;
+  padding: 40px;
+  /* border: 1px solid blue; */
   font-weight: 500;
+  margin-bottom: 80px;
+  font-size: 1.4em;
 }
 .parag h3 {
   margin-bottom: 0.5em;
-  font-size: 1.8em;
   font-weight: 500;
   line-height: 1em;
+  font-size: 3em;
 }
-.parag:last-child h3 {
-  word-break: break-all;
+.paragprime,
+.paraglist {
+  list-style: none;
+  margin-bottom: 1em;
+  padding-left: 100px;
+  position: relative;
+  line-height: 1.6em;
+}
+.paraglist > li::before {
+  content: "—";
+  margin-right: 5px;
+}
+.paraglist > ul  {
+  list-style: none;
+  padding: 10px 0 10px 6px;
+  margin-bottom: 0.4em;
+}
+.paraglist > ul > li::before {
+  content: "-";
+  margin-right: 5px;
 }
 
-.moreone .parag p {
-  margin-bottom: 2em;
-}
-.parag > p {
-  margin-bottom: 1em;
-}
-.parag > ul {
-  margin-bottom: 1em;
-  padding: 0 20px;
-  line-height: 1.2em;
-}
-.parag > ul > ul {
-  padding: 0 20px;
-}
-.parag > ul > li,
-.parag > ul > ul > li {
-  margin-bottom: 15px;
-}
-
-.langbut, .menubut {
-  position: fixed;
-  right: 15px;
-  width: 48px;
-  height: 48px;
-  border: 2px solid black;
-  background: #0000ff;
-  font-size: 1.2em;
-  font-weight: 500;
-  color: black;
-  cursor: pointer;
-  line-height: 1em;
-}
-.langbut {
-  top: 12px;
-}
-.menubut {
-  bottom: 20px;
-}
-.morefour {
+.hacersitio {
   font-size: 0.9em;
   font-style: italic;
-  color: blue;
+  color: black;
 }
 
-/* ---------- MIDSIZE ---------- */
-@media (max-width: 1000px) and (min-width: 560px) {
-  .landing > *, .more > *  {
-    padding: 0;
-    width: 80%;
+/* ------------------------------- */
+.langbut,
+.menubut {
+  position: fixed;
+  background: #0000ff;
+  font-family: var(--sans-font);
+  color: #f0ecf1;
+  cursor: pointer;
+  line-height: 1em;
+  z-index: 5;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  font-size: 1.6em;
+  border: none;
+}
+.langbut {
+  top: 30px;
+}
+.menubut {
+  bottom: 30px;
+}
+
+/* ------------ MEDIUM ----------- */
+@media (max-width: 900px) and (min-width: 600px) {
+  .parag {
+    font-size: 1.3em;
+    padding: 30px;
   }
   .landingprime h1 {
     font-size: 6em;
   }
-  .landingprime h2 {
-    font-size: 1.2em;
-  }
-  .more {
-    font-size: 1.5em;
-    line-height: 1.3em;
-  }
-
-  .langbut, .menubut {
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    font-size: 1.6em;
-  }
-  .langbut {
-    top: 30px;
-  }
-  .menubut {
-    bottom: 30px;
-  }
 }
 
-/* ---------- DESKTOP ----------- */
-@media (min-width: 1000px) {
-  .landing > *, .more > *  {
-    padding: 0;
-    width: 66%;
+/* ------------ MOBILE ------------ */
+@media (max-width: 600px) {
+  .landingprime {
+    width: 100%;
+    padding: 0 20px;
   }
   .landingprime h1 {
-    font-size: 8em;
+    font-size: 3.6em;
   }
   .landingprime h2 {
-    font-size: 1.8em;
+    font-size: 1.3em;
   }
   .landingprime p,
   .landingprime a {
-    /* font-weight: 500; */
+    font-size: 1.2em;
+  }
+  .more > * {
+    width: 100%;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+  }
+  .moretitle {
+    padding-left: 20px;
     font-size: 1.4em;
   }
-
-  .more {
-    font-size: 1.8em;
-    line-height: 1.4em;
+  .parag {
+    font-size: 1.2em;
+    padding: 20px 10px 20px 20px;
   }
   .parag h3 {
-    font-size: 2.4em;
+    font-size: 1.8em;
   }
-  .parag > ul,
-  .parag > ul > ul {
-    margin-bottom: 1em;
-    padding: 0 30px;
+  .parag:nth-child(3) h3 {
+    word-break: break-all;
+  }
+  .paragprime,
+  .paraglist {
+    padding: 0;
     line-height: 1.4em;
   }
-  .langbut, .menubut {
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    font-size: 1.6em;
+  .langbut,
+  .menubut {
+    right: 15px;
+    width: 48px;
+    height: 48px;
+    /* border: 2px solid black; */
+    font-size: 1.2em;
   }
   .langbut {
-    top: 30px;
+    top: 15px;
   }
   .menubut {
-    bottom: 30px;
+    bottom: 15px;
   }
 }
