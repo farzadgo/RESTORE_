@@ -1,13 +1,30 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 // import Link from 'next/link'
 import * as Icon from 'react-feather'
-import { contact } from '../config/sitedata'
+import { contact, links } from '../config/sitedata'
 import * as styles from '../styles/Menu.module.css'
 
-const Menu = ({ setToggle, content }) => {
+const Menu = ({ setToggle, content, lang }) => {
+
+  const [dlInfo, setDlInfo] = useState({ })
+
+  const dlDaten = {
+    en: {
+      callTitle:'Open Call (EN)',
+      callLink: links.openEN,
+      formTitle: 'Application Form',
+      formLink: links.formEN
+    },
+    de: {
+      callTitle:'Open Call (DE)',
+      callLink: links.openDE,
+      formTitle: 'Anmeldeformular',
+      formLink: links.formDE
+    }
+  }
 
   const iconProps = {
-    color: '#eee',
+    color: '#000',
     size: 36,
     strokeWidth: 1
   }
@@ -23,7 +40,7 @@ const Menu = ({ setToggle, content }) => {
 
   const CloseMenu = ({ setToggle }) => {
     const iconProps = {
-      color: '#eee',
+      color: '#000',
       size: 48,
       strokeWidth: 1
     }
@@ -35,6 +52,18 @@ const Menu = ({ setToggle, content }) => {
       </div>
     )
   }
+
+  useEffect(() => {
+    if (lang === 'en') {
+      setDlInfo({...dlDaten.en})
+    }
+    if (lang === 'de') {
+      setDlInfo ({...dlDaten.de})
+    }
+    // return () => {
+    // }
+  }, [])
+  
 
   return (
     <div className={styles.container}>
@@ -51,11 +80,11 @@ const Menu = ({ setToggle, content }) => {
             <a href={`#${e.group}`}>{e.title}</a>
           </li>)}
           <li>
-            <a href='https://cloud.disorient.xyz/s/TzeZtjiPnmKwXbM/download?path=&files=RESTORE_EN_Aplication_Form.pdf'>Applicatin Form</a>
+            <a href={dlInfo.callLink}> {dlInfo.callTitle} </a>
             <Icon.Download {...iconProps}/>
           </li>
           <li>
-            <a href='https://cloud.disorient.xyz/s/TzeZtjiPnmKwXbM/download?path=&files=RESTORE_DE_Formular.pdf'>Anmeldeformular</a>
+            <a href={dlInfo.formLink}> {dlInfo.formTitle} </a>
             <Icon.Download {...iconProps}/>
           </li>
           {/* <li><Link href='/terms'> Terms and Conditions </Link></li> */}
@@ -71,7 +100,7 @@ export default Menu
 
 const SocialIcon = ({ item }) => {
   const iconProps = {
-    color: '#eee',
+    color: '#000',
     size: 36,
     strokeWidth: 1
   }

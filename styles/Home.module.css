@@ -6,23 +6,25 @@
   min-height: 100vh;
 }
 .landing {
-  color: #0000ff;
+  /* color: #F255FF; */
+  color: black;
   justify-content: center;
-  background-color: #F255FF;
+  background-color: #0000ff;
   user-select: none;
   -webkit-user-select: none;
 }
 .landingprime h1 {
-  font-weight: 300;
+  font-weight: 500;
   font-size: 3.6em;
   left: -0.06em;
   position: relative;
 }
 .landingprime h2 {
-  font-weight: 200;
+  font-weight: 600;
   font-size: 1.3em;
 }
 .landingprime p, .landingprime a {
+  font-weight: 600;
   font-size: 1.2em;
   margin-bottom: 1em;
 }
@@ -79,10 +81,10 @@
   right: 15px;
   width: 48px;
   height: 48px;
-  border: 1px solid #eee;
+  border: 2px solid black;
   background: #F255FF;
   font-size: 1.2em;
-  color: #eee;
+  color: black;
   cursor: pointer;
   line-height: 1em;
 }
@@ -141,9 +143,12 @@
   .landingprime h2 {
     font-size: 1.8em;
   }
-  .landingprime p {
-    font-weight: 500;
+  .landingprime p,
+  .landingprime a {
+    /* font-weight: 500; */
+    font-size: 1.4em;
   }
+
   .more {
     font-size: 1.8em;
     line-height: 1.4em;

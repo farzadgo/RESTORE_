@@ -51,7 +51,7 @@ export const opencall = [
           'RESTORE_ provides the artists with',
           [
             'a space to work collectively for a week to produce a site-specific performance',
-            '900€ production free',
+            '900€ production fee (per solo artist or duo)',
             'technical support throughout the process',
             'a small budget for material and costumes'
           ],
@@ -139,7 +139,7 @@ export const opencall = [
           'RESTORE_ bietet den Künstlern*innen:',
           [
             'einen Raum, um eine Woche lang gemeinsam eine ortsspezifische Performance zu erarbeiten',
-            '900€ Produktionshonorar',
+            '900€ Produktionshonorar (pro Künstler*in oder Duo)',
             'technische Unterstützung während des gesamten Prozesses',
             'ein kleines Budget für Material und Kostüme'
           ],
