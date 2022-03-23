@@ -26,7 +26,7 @@ const Menu = ({ setToggle, content, lang }) => {
   const iconProps = {
     color: '#000',
     size: 36,
-    strokeWidth: 1
+    strokeWidth: 1.5
   }
 
   useEffect(() => {
@@ -81,11 +81,11 @@ const Menu = ({ setToggle, content, lang }) => {
           </li>)}
           <li>
             <a href={dlInfo.callLink}> {dlInfo.callTitle} </a>
-            <Icon.Download {...iconProps}/>
+            <div className={styles.dlicon}><Icon.Download {...iconProps}/></div>
           </li>
           <li>
             <a href={dlInfo.formLink}> {dlInfo.formTitle} </a>
-            <Icon.Download {...iconProps}/>
+            <div className={styles.dlicon}><Icon.Download {...iconProps}/></div>
           </li>
           {/* <li><Link href='/terms'> Terms and Conditions </Link></li> */}
         </ul>
@@ -102,7 +102,7 @@ const SocialIcon = ({ item }) => {
   const iconProps = {
     color: '#000',
     size: 36,
-    strokeWidth: 1
+    strokeWidth: 1.5
   }
   const TagName = Icon[item.name]
   return (
@@ -110,9 +110,9 @@ const SocialIcon = ({ item }) => {
       <a
         className={styles.contactbtn} 
         href={item.url}
-        aria-label={`${item.name} Link`}
+        aria-label={item.name}
         target="_blank"
-        rel="noreferrer"
+        // rel="noreferrer"
       >
         <TagName {...iconProps}/>
       </a>
