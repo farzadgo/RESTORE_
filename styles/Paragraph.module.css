@@ -3,12 +3,11 @@
   padding: 40px 40px 10px 40px;
   border: 1px solid #eee;
   font-weight: 300;
-  margin-bottom: 80px;
+  margin-bottom: 90px;
   font-size: 1.4em;
 }
 .parag h3 {
   font-weight: 500;
-  line-height: 1em;
   font-size: 2.8em;
   font-family: var(--space-font);
   margin-bottom: 0.5em;
@@ -48,10 +47,24 @@
   margin-right: 0.6em;
 }
 
+/* ------------------------------- */
+.parag:last-child {
+  font-size: 1.2em;
+  font-style: italic;
+  color: #eee;
+  border: none;
+  background-color: #0000ff;
+}
+.parag:last-child > div {
+  background-color: #0000ff;
+  border: none;
+}
+
 /* ------------ MEDIUM ----------- */
 @media (max-width: 900px) and (min-width: 600px) {
   .parag {
     font-size: 1.3em;
+    margin-bottom: 60px;
     padding: 30px 30px 10px 30px;
   }
 }
@@ -61,15 +74,19 @@
   .parag {
     font-size: 1.2em;
     padding: 20px 10px 0 20px;
+    margin-bottom: 30px;
   }
   .parag h3 {
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
-  .parag:nth-child(3) h3 {
+  .parag:nth-child(6) h3 {
     word-break: break-all;
   }
   .paragbody {
     padding: 0;
     line-height: 1.4em;
+  }
+  .parag:last-child {
+    font-size: 1em;
   }
 }

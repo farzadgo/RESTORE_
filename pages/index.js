@@ -24,12 +24,6 @@ const Home = () => {
   const [content, setContent] = useState('')
   const [lang, setLang] = useState('en')
 
-  const [intro, setIntro] = useState('')
-  const [whatwho, setWhatwho] = useState('')
-  const [rest, setRest] = useState('')
-  const [about, setAbout] = useState('')
-  // console.log(intro)
-
   const [activeParag, setActiveParag] = useState('intro')
   const setActive = (group) => {
     setActiveParag(group)
@@ -85,10 +79,7 @@ const Home = () => {
       const data = await response.json()
       const cont = await data.filter(e => e.lang === lang)[0].data
       setContent(cont)
-      setIntro(cont.filter(e => e.group === 'intro'))
-      setWhatwho(cont.filter(e => e.group === 'what' || e.group === 'who'))
-      setRest(cont.filter(e => e.group === 'when' || e.group === 'offer' || e.group === 'apply'))
-      setAbout(cont.filter(e => e.group === 'we'))
+      // setWhatwho(cont.filter(e => e.group === 'what' || e.group === 'who'))
     }
     fetchData()
 
@@ -122,36 +113,27 @@ const Home = () => {
         <div className={styles.scroller}>
           <div className={styles.marquee}>
             <p>
-              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! &nbsp;
+              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
+              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
+              &nbsp;
             </p>
             <p>
-              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! &nbsp;
+              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
+              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
+              &nbsp;
             </p>
           </div>
         </div>
       </section>
 
-      {/* USEREF here to spread images */}
       <section className={styles.more} id='more'>
 
         <div className={styles.moretitle}>
           <h3>{subtitles.call}</h3>
         </div>
 
-        <div>
-          {intro && intro.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
-        </div>
-
-        <div>
-          {whatwho && whatwho.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
-        </div>
-
-        <div>
-          {rest && rest.map(e => <Paragraph  key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
-        </div>
-
-        <div className={styles.hacersitio}>
-          {about && about.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
+        <div className={styles.moreparags}>
+          {content && content.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
         </div>
 
       </section>

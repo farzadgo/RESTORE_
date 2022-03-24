@@ -39,7 +39,8 @@
   background-image: radial-gradient(#464646 1px, transparent 0);
   background-size: 38px 38px;
 }
-.more > *  {
+.moretitle,
+.moreparags  {
   position: relative;
   color: #eee;
 }
@@ -51,17 +52,6 @@
 }
 .moretitle h3 {
   font-weight: 300;
-}
-
-/* ------------------------------- */
-.hacersitio {
-  font-size: 0.9em;
-  font-style: italic;
-  color: #eee;
-}
-.hacersitio > div {
-  background-color: #0000ff;
-  border: none;
 }
 
 /* ------------------------------- */
@@ -107,7 +97,7 @@
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
-  animation: marquee 22s linear infinite;
+  animation: marquee 14s linear infinite;
 }
 .marquee p {
   display: inline-block;
@@ -145,15 +135,18 @@
   .landingprime a {
     font-size: 1.2em;
   }
-  .more > * {
-    /* width: 100%; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .more {
+    padding-bottom: 0;
   }
   .moretitle {
     padding-left: 20px;
     font-size: 1.4em;
+  }
+  .moreparags {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .langbut,
