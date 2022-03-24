@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Menu from '../components/Menu'
 import { debounce } from '../config/helpers'
+import Paragraph from '../components/Paragraph'
+import { useRouter } from 'next/router'
 
 // import { server } from '../config'
 // export const getStaticProps = async () => {
@@ -14,6 +16,7 @@ import { debounce } from '../config/helpers'
 
 const Home = () => {
   
+  const router = useRouter()
   const [toggle, setToggle] = useState(false)
   const toggler = () => setToggle(prev => !prev)
   const [width, setWidth] = useState(900)
@@ -26,6 +29,12 @@ const Home = () => {
   const [rest, setRest] = useState('')
   const [about, setAbout] = useState('')
   // console.log(intro)
+
+  const [activeParag, setActiveParag] = useState('intro')
+  const setActive = (group) => {
+    setActiveParag(group)
+    router.push(`/#${group}`)
+  }
 
   const [subtitles, setSubtitles] = useState({
     title: '',
@@ -97,7 +106,7 @@ const Home = () => {
   return (
     <div className={styles.home} >
 
-      {toggle && <Menu setToggle={toggler} content={content} lang={lang} />}
+      {toggle && <Menu setToggle={toggler} content={content} lang={lang} setActive={setActive}/>}
 
       <button onClick={handleLang} className={styles.langbut}>{lang === 'de' ? 'EN' : 'DE'}</button>
 
@@ -130,19 +139,19 @@ const Home = () => {
         </div>
 
         <div>
-          {intro && intro.map(e => <Parag content={e} key={e.id} width={width}/>)}
+          {intro && intro.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
         </div>
 
         <div>
-          {whatwho && whatwho.map(e => <Parag content={e} key={e.id} width={width}/>)}
+          {whatwho && whatwho.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
         </div>
 
         <div>
-          {rest && rest.map(e => <Parag content={e} key={e.id} width={width}/>)}
+          {rest && rest.map(e => <Paragraph  key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
         </div>
 
         <div className={styles.hacersitio}>
-          {about && about.map(e => <Parag content={e} key={e.id} width={width}/>)}
+          {about && about.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
         </div>
 
       </section>
@@ -152,65 +161,3 @@ const Home = () => {
 }
 
 export default Home
-
-
-
-const Parag = ({ content, width }) => {
-
-  const [cardWidth, setCardWidth] = useState('')
-  const [position, setPosition] = useState('')
-
-  const paragStyle = {
-    width: cardWidth,
-    left: position
-  }  
-
-  useEffect(() => {
-    let offset
-    if (width > 1700) {
-      offset = width * 0.5
-    } else if (width > 1300 && width < 1699) {
-      offset = width * 0.4
-    } else if (width > 900 && width < 1299) {
-      offset = width * 0.3
-    } else {
-      offset = 0
-    }
-    setCardWidth((width - offset) - 15)
-    setPosition((Math.random() * offset))
-
-    // if (width < 600) {
-    //   setCardWidth('100%')
-    //   setPosition('auto')
-    // }
-  
-    // return () => {
-    // }
-  }, [width])
-  
-
-  
-  return (
-    <div className={styles.parag} style={paragStyle} id={content.group}>
-
-      {content.title && <h3>{content.title}</h3>}
-
-      {content.body && content.body.map(e => {
-        let idone = Math.random().toString(36).substring(2, 15)
-        if (typeof e === 'string') {
-          return <p className={styles.paragprime} key={idone}>{e}</p>
-        } else {
-          return <ul className={styles.paraglist} key={idone}>{e.map(p => {
-            let idtwo = Math.random().toString(36).substring(2, 15)
-            if (typeof p === 'string') {
-              return <li key={idtwo}>{p}</li>
-            } else {
-              return <ul key={idtwo}>{p.map((e, i) => <li key={i}>{e}</li>)}</ul>
-            }
-          })}</ul>
-        }
-      })}
-
-    </div>
-  )
-}

@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,600;1,100;1,200;1,300;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
-
 :root {
-  --sans-font: 'Roboto','Space Grotesk', 'Helvetica', 'Arial', sans-serif;
+  --space-font: 'Space Grotesk', 'Helvetica', 'Verdana', sans-serif;
+  --sans-font: 'Roboto', 'Arial', sans-serif;
   --code-font: 'Roboto Mono', monospace;
   --header-height: 60px;
 }
@@ -36,7 +36,7 @@ button {
   background: blue;
 }
 
-@media (min-width: 560px) {
+@media (min-width: 600px) {
   ::-webkit-scrollbar { width: 15px; height: 15px; }
   ::-webkit-scrollbar-track { background-color: #0000ff; }
   ::-webkit-scrollbar-thumb {

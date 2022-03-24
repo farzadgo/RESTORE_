@@ -1,0 +1,75 @@
+.parag {
+  position: relative;
+  padding: 40px 40px 10px 40px;
+  border: 1px solid #eee;
+  font-weight: 300;
+  margin-bottom: 80px;
+  font-size: 1.4em;
+}
+.parag h3 {
+  font-weight: 500;
+  line-height: 1em;
+  font-size: 2.8em;
+  font-family: var(--space-font);
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+.paragbody {
+  padding-left: 100px;
+  line-height: 1.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+.paragprime {
+  margin-bottom: 1em;
+}
+.paraglist {
+  list-style: none;
+  margin-bottom: 1em;
+  padding: 0;
+}
+.paraglist > li::before {
+  content: "—";
+  margin-right: 0.6em;
+  font-weight: bold;
+}
+.paraglist > ul  {
+  list-style: none;
+  padding: 10px 0 20px;
+  margin-bottom: 0.4em;
+}
+.paraglist > ul > li {
+  margin-bottom: 2px;
+}
+.paraglist > ul > li::before {
+  content: "—";
+  margin-right: 0.6em;
+}
+
+/* ------------ MEDIUM ----------- */
+@media (max-width: 900px) and (min-width: 600px) {
+  .parag {
+    font-size: 1.3em;
+    padding: 30px 30px 10px 30px;
+  }
+}
+
+/* ------------ MOBILE ------------ */
+@media (max-width: 600px) {
+  .parag {
+    font-size: 1.2em;
+    padding: 20px 10px 0 20px;
+  }
+  .parag h3 {
+    font-size: 1.8em;
+  }
+  .parag:nth-child(3) h3 {
+    word-break: break-all;
+  }
+  .paragbody {
+    padding: 0;
+    line-height: 1.4em;
+  }
+}

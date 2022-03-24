@@ -20,7 +20,7 @@ export const opencall = [
           'RESTORE_ situates interdisciplinary performances in context. The project will consist of three different temporary occupations of vacant local shops in the city of Bremen. Three artists—or duos—from varying disciplines will collaborate and work in trialogues for the first time to produce an in-situ performance in one of these three locations.',
           'In short, the performances are expected to be viewed and experienced by the audience from the public spaces such as the adjacent streets, possibly through the display window.',
           'RESTORE_ contemplates a contextual understanding and awareness, by which the artists are asked to explore the architecture and its environment by analyzing the relationship between both sides of the glass window. They are encouraged to generate questions that serve as a starting point for their collaborations in which methods for the critical examination of the social-political, historical, experimental sociality can develop. RESTORE_ is particularly interested in offering those empty spaces as containers, where free artistic experimentation is produced in a collective, public way.',
-          '> Please note: Do Not apply with a proposal. The concepts are expected to be developed during the collaborations.'
+          '> Please note: Do not apply with a proposal. The concepts are expected to be developed during the collaborations.'
         ]
       },
       {
@@ -66,7 +66,7 @@ export const opencall = [
           'Please send your applications to contact@restore-bremen.space with the following documents:',
           [
             'Registration form',
-            'A short introduction maximum 2 A4 pages in one PDF file answering these questions',
+            'A short introduction maximum 2 A4 pages in one PDF file answering these questions:',
             [
               'Who you are and what you do?',
               'Why do you want to be part of RESTORE_?',

@@ -4,7 +4,7 @@ import * as Icon from 'react-feather'
 import { contact, links } from '../config/sitedata'
 import * as styles from '../styles/Menu.module.css'
 
-const Menu = ({ setToggle, content, lang }) => {
+const Menu = ({ setToggle, content, lang, setActive }) => {
 
   const [dlInfo, setDlInfo] = useState({ })
 
@@ -36,7 +36,10 @@ const Menu = ({ setToggle, content, lang }) => {
     }
   }, [])
 
-  const handleMenuItem = () => setToggle()
+  const handleMenuItem = (group) => {
+    setToggle()
+    setActive(group)
+  }
 
   const CloseMenu = ({ setToggle }) => {
     const iconProps = {
@@ -76,11 +79,12 @@ const Menu = ({ setToggle, content, lang }) => {
 
       <nav className={styles.nav}>
         <ul>
-          <li onClick={handleMenuItem}>
+          <li onClick={setToggle}>
             <a href='#more'> OPEN CALL </a>
           </li>
-          {content && content.map((e, i) => <li onClick={handleMenuItem} key={i}>
-            <a href={`#${e.group}`}>{e.title}</a>
+          {content && content.map((e, i) => <li onClick={() => handleMenuItem(e.group)} key={i}>
+            {/* <a href={`#${e.group}`}>{e.title}</a> */}
+            <span>{e.title}</span>
           </li>)}
           <li>
             <a href={dlInfo.callLink}> {dlInfo.callTitle} </a>
