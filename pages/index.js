@@ -110,8 +110,8 @@ const Home = () => {
           <p> {subtitles.dates} </p>
           <a href='#more'> {subtitles.more} ↓ </a>
         </div>
-        <div class={styles.scroller}>
-          <div class={styles.marquee}>
+        <div className={styles.scroller}>
+          <div className={styles.marquee}>
             <p>
               OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! &nbsp;
             </p>
