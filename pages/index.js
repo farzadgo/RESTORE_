@@ -39,13 +39,13 @@ const Home = () => {
       title:'INTERDISCIPLINARY PERFORMANCES IN CONTEXT',
       more: 'Read More',
       dates: 'Bremen 10 - 18 June 2022',
-      call: 'OPEN CALL (Deadline: 21 April 2022)'
+      call: 'Deadline: 21 April 2022'
     },
     de: {
       title:'INTERDISZIPLINÄRE PERFORMANCES IM KONTEXT',
       more: 'Mehr lesen',
       dates: 'Bremen 10 - 18 Juni 2022',
-      call: 'OPEN CALL (Bewerbungsfrist: 21 April 2022)'
+      call: 'Bewerbungsfrist: 21 April 2022'
     }
   }
 
@@ -110,8 +110,19 @@ const Home = () => {
           <p> {subtitles.dates} </p>
           <a href='#more'> {subtitles.more} ↓ </a>
         </div>
+        <div class={styles.scroller}>
+          <div class={styles.marquee}>
+            <p>
+              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! &nbsp;
+            </p>
+            <p>
+              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! &nbsp;
+            </p>
+          </div>
+        </div>
       </section>
 
+      {/* USEREF here to spread images */}
       <section className={styles.more} id='more'>
 
         <div className={styles.moretitle}>

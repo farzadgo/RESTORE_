@@ -4,9 +4,9 @@
   align-items: center;
   padding: var(--header-height) 0;
   min-height: 100vh;
-  color: black;
+  color: #eee;
   justify-content: center;
-  background-color: #0000ff;
+  background-color: #000;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -14,18 +14,18 @@
   width: 66%;
 }
 .landingprime h1 {
-  font-weight: 500;
+  font-weight: 100;
   font-size: 8em;
   left: -0.06em;
   position: relative;
 }
 .landingprime h2 {
-  font-weight: 600;
+  font-weight: 300;
   font-size: 1.8em;
 }
 .landingprime p,
 .landingprime a {
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.5em;
   margin-bottom: 1em;
 }
@@ -34,25 +34,27 @@
 .more {
   padding: var(--header-height) 0;
   min-height: 100vh;
-  background-color: #f0ecf1;
-  background-image: radial-gradient(#c8c8c8 1px, transparent 0);
-  background-size: 36px 36px;
+  background-color: black;
+  background-image: radial-gradient(#464646 1px, transparent 0);
+  background-size: 38px 38px;
 }
 .more > *  {
   position: relative;
-  color: #0000ff;
+  color: #eee;
 }
 .moretitle {
   margin-bottom: 40px ;
   padding-left: 2em;
-  font-weight: bold;
   font-size: 2em;
+}
+.moretitle h3 {
+  font-weight: 300;
 }
 .parag {
   position: relative;
   padding: 40px;
-  /* border: 1px solid blue; */
-  font-weight: 500;
+  border: 1px solid #eee;
+  font-weight: 300;
   margin-bottom: 80px;
   font-size: 1.4em;
 }
@@ -87,7 +89,7 @@
 .hacersitio {
   font-size: 0.9em;
   font-style: italic;
-  color: black;
+  color: #eee;
 }
 
 /* ------------------------------- */
@@ -111,6 +113,39 @@
 }
 .menubut {
   bottom: 30px;
+}
+
+/* ------------------------------- */
+
+.scroller {
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
+  overflow: hidden;
+  background: #0000ff;
+  color: #eee;
+  font-size: 3em;
+  font-weight: 300;
+  padding: 0;
+  height: 60px;
+}
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+.marquee p {
+  display: inline-block;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 /* ------------ MEDIUM ----------- */
@@ -167,16 +202,16 @@
   }
   .langbut,
   .menubut {
-    right: 15px;
+    right: 20px;
     width: 48px;
     height: 48px;
     /* border: 2px solid black; */
     font-size: 1.2em;
   }
   .langbut {
-    top: 15px;
+    top: 20px;
   }
   .menubut {
-    bottom: 15px;
+    bottom: 20px;
   }
 }
