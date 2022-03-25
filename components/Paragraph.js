@@ -24,6 +24,11 @@ const Paragraph = ({ content, width, activeParag, setActive }) => {
     setActive(content.group)
   }
 
+  const createMarkup = (string) => {
+    console.log(string)
+    return {__html: string}
+  }
+
 
   useEffect(() => {
     if (content.group !== 'intro' && content.group !== 'we') {
@@ -36,7 +41,7 @@ const Paragraph = ({ content, width, activeParag, setActive }) => {
 
     // return () => {}
   }, [activeParag])
-  
+
 
   useEffect(() => {
     let offset
@@ -69,14 +74,16 @@ const Paragraph = ({ content, width, activeParag, setActive }) => {
         {content.body && content.body.map(e => {
           let idone = Math.random().toString(36).substring(2, 15)
           if (typeof e === 'string') {
-            return <p className={styles.paragprime} key={idone}>{e}</p>
+            // let words = e.split(' ')
+            // return <p className={styles.paragprime} key={idone}>{e}</p>
+            return <p className={styles.paragprime} key={idone} dangerouslySetInnerHTML={createMarkup(e)} />
           } else {
             return <ul className={styles.paraglist} key={idone}>{e.map(p => {
               let idtwo = Math.random().toString(36).substring(2, 15)
               if (typeof p === 'string') {
-                return <li key={idtwo}>{p}</li>
+                return <li key={idtwo} dangerouslySetInnerHTML={createMarkup(p)} />
               } else {
-                return <ul key={idtwo}>{p.map((e, i) => <li key={i}>{e}</li>)}</ul>
+                return <ul key={idtwo}>{p.map((e, i) => <li key={i} dangerouslySetInnerHTML={createMarkup(e)} />)}</ul>
               }
             })}</ul>
           }

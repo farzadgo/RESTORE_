@@ -31,20 +31,18 @@
 }
 .paraglist > li::before {
   content: "—";
-  margin-right: 0.6em;
+  margin-right: 0.5em;
   font-weight: bold;
 }
 .paraglist > ul  {
   list-style: none;
-  padding: 10px 0 20px;
+  padding: 10px 0 10px 1.2em;
   margin-bottom: 0.4em;
+  font-size: 0.96em;
 }
 .paraglist > ul > li {
-  margin-bottom: 2px;
-}
-.paraglist > ul > li::before {
-  content: "—";
-  margin-right: 0.6em;
+  line-height: 1.1em;
+  margin-bottom: 0.6em;
 }
 
 /* ------------------------------- */
@@ -53,11 +51,7 @@
   font-style: italic;
   color: #eee;
   border: none;
-  background-color: #0000ff;
-}
-.parag:last-child > div {
-  background-color: #0000ff;
-  border: none;
+  border: 1px solid #0000ff;
 }
 
 /* ------------ MEDIUM ----------- */
@@ -88,5 +82,8 @@
   }
   .parag:last-child {
     font-size: 1em;
+  }
+  .paraglist > ul  {
+    padding: 10px 0 20px 1.4em;
   }
 }
