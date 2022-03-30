@@ -25,7 +25,6 @@ const Paragraph = ({ content, width, activeParag, setActive }) => {
   }
 
   const createMarkup = (string) => {
-    console.log(string)
     return {__html: string}
   }
 
@@ -34,7 +33,6 @@ const Paragraph = ({ content, width, activeParag, setActive }) => {
     if (content.group !== 'intro' && content.group !== 'we') {
       setBodyHeight(0)
     }
-
     if (content.group === activeParag) {
       setBodyHeight('auto')
     }
@@ -74,8 +72,6 @@ const Paragraph = ({ content, width, activeParag, setActive }) => {
         {content.body && content.body.map(e => {
           let idone = Math.random().toString(36).substring(2, 15)
           if (typeof e === 'string') {
-            // let words = e.split(' ')
-            // return <p className={styles.paragprime} key={idone}>{e}</p>
             return <p className={styles.paragprime} key={idone} dangerouslySetInnerHTML={createMarkup(e)} />
           } else {
             return <ul className={styles.paraglist} key={idone}>{e.map(p => {

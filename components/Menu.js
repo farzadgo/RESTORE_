@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-// import Link from 'next/link'
 import * as Icon from 'react-feather'
-import { contact, links } from '../config/sitedata'
 import * as styles from '../styles/Menu.module.css'
+import { contact, links } from '../config/sitedata'
 
 const Menu = ({ setToggle, content, lang, setActive }) => {
 
@@ -63,8 +62,7 @@ const Menu = ({ setToggle, content, lang, setActive }) => {
     if (lang === 'de') {
       setDlInfo ({...dlDaten.de})
     }
-    // return () => {
-    // }
+    // return () => {}
   }, [])
   
 
@@ -80,10 +78,9 @@ const Menu = ({ setToggle, content, lang, setActive }) => {
       <nav className={styles.nav}>
         <ul>
           <li onClick={setToggle}>
-            <a href='#more'> OPEN CALL </a>
+            <a href='#call'> OPEN CALL </a>
           </li>
           {content && content.map((e, i) => <li onClick={() => handleMenuItem(e.group)} key={i}>
-            {/* <a href={`#${e.group}`}>{e.title}</a> */}
             <span>{e.title}</span>
           </li>)}
           <li>
@@ -94,7 +91,6 @@ const Menu = ({ setToggle, content, lang, setActive }) => {
             <a href={dlInfo.formLink}> {dlInfo.formTitle} </a>
             <div className={styles.dlicon}><Icon.Download {...iconProps}/></div>
           </li>
-          {/* <li><Link href='/terms'> Terms and Conditions </Link></li> */}
         </ul>
       </nav>
 
