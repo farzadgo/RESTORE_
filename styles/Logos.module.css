@@ -5,9 +5,10 @@
   grid-template-columns: 290px 370px;
   justify-content: center;
   background-color: #000;
+  padding: 30px 0 20px;
 }
 .logo {
-  margin: 30px 0;
+  margin-bottom: 30px;
   height: 60px;
   max-width: 100%;
   position: relative;
@@ -18,9 +19,5 @@
   .container {
     width: 100%;
     grid-template-columns: 1fr;
-    padding: 10px 0;
-  }
-  .logo {
-    margin: 6px 0;
   }
 }

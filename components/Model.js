@@ -5,6 +5,8 @@ import Spinner from '../components/Spinner'
 
 const Model = () => {
 
+  const [mobile, setMobile] = useState(false)
+
   const initialCamX = 8
   const initialCamY = 8
   const initialCamZ = 10
@@ -16,11 +18,14 @@ const Model = () => {
   const [scene] = useState(new THREE.Scene())
   const [camera, setCamera] = useState()
   const [target] = useState(new THREE.Vector3(0, 0, 0))
-  const [initialCameraPosition] = useState(new THREE.Vector3(initialCamX, initialCamY, initialCamZ))
+  const [initialCamPosition, setInitialCamPosition] = useState(new THREE.Vector3(initialCamX, initialCamY, initialCamZ))
 
   const handleWindowResize = useCallback(() => {
-    // MAKE IT WHEN MOBILE SCREEN THE ZOOM/Z CHANGES
-    // ALSO MAYBE AUTO ROTATE
+    if (window.innerWidth < 600) {
+      setMobile(true)
+    } else {
+      setMobile(false)
+    }
     const { current: container } = refBody
     if (container && renderer) {
       renderer.setSize(container.clientWidth, container.clientHeight)
@@ -29,7 +34,7 @@ const Model = () => {
 
   const handleMouseMove = useCallback(event => {
     const { current: container } = refBody
-    if (container && camera) {
+    if (container && camera && !mobile) {
       let halfW = container.clientWidth / 2
       let halfH = container.clientHeight / 2
       let mX = (event.clientX - halfW) / 2
@@ -80,7 +85,7 @@ const Model = () => {
       // camera.position.set(10, 2, 4)
       // camera.position.z = 4
       // !!! IMPORTANT !!!
-      camera.position.copy(initialCameraPosition)
+      camera.position.copy(initialCamPosition)
 
       camera.aspect = sceneW / sceneH
       camera.updateProjectionMatrix()
@@ -153,6 +158,9 @@ const Model = () => {
 
 
   useEffect(() => {
+    if (window.innerWidth < 600) {
+      setMobile(true)
+    }
     window.addEventListener('resize', handleWindowResize)
     document.addEventListener('mousemove', handleMouseMove)
     return () => {

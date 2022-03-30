@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Menu from '../components/Menu'
-// import Spinner from '../components/Spinner'
 import Logos from '../components/Logos'
 import { debounce } from '../config/helpers'
 import Paragraph from '../components/Paragraph'
