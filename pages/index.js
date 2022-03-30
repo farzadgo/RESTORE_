@@ -19,13 +19,11 @@ import dynamic from 'next/dynamic'
 const Model = dynamic(
   () => import('../components/Model'), {
     ssr: false,
-    loading: () => <Spinner />
+    loading: () => <div><Spinner /></div>
   }
 )
 
-Model.displayName = 'Model'
-
-function Home() {
+const Home = () => {
   
   const router = useRouter()
   const [toggle, setToggle] = useState(false)
