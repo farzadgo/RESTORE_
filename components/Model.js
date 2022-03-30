@@ -48,7 +48,7 @@ const Model = () => {
 
       // ---------- TEXTURE ----------
       const path = 'textures/'
-      const format = '.jpg'
+      const format = '.png'
       const urls = [
         path + 'px' + format, path + 'nx' + format,
         path + 'py' + format, path + 'ny' + format,

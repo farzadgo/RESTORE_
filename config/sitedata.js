@@ -1,9 +1,9 @@
 module.exports = {
   title: 'RESTORE_',
   description: 'RESTORE_interdisciplinary performances in context',
-  keywords: 'performance, live, interdisciplinary, art, sound, visual, dance',
+  keywords: 'performance, live, dance, non-place, empty spaces, abandoned shops,interdisciplinary, art, sound, visual, dance, contextual, in-situ',
   siteUrl: 'https://restore-bremen.space',
-  authorName: 'Hacer Sitio Corp',
+  authorName: 'hacer sitio corp',
   email: 'contact@restore-bremen.space',
   // image: '/og.png',
 
@@ -29,14 +29,5 @@ module.exports = {
   sizes: {
     navHeight: 60,
     mobileWidth: 600
-  },
-  colors: {
-    lightWhite: '#e0e0e0',
-    darkWhite :'#bbbbbb',
-    lightGray: '#3f3f3f',
-    darkGray: '#1b1b1b',
-    veryGray: '#111111',
-    clear: '#00000000',
-    codeGreen: '#00b400'
   }
 }

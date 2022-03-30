@@ -5,7 +5,7 @@
   --space-font: 'Space Grotesk', 'Helvetica', 'Verdana', sans-serif;
   --sans-font: 'Roboto', 'Arial', sans-serif;
   --header-height: 60px;
-  --padding: 30px;
+  --padding: 20px;
 }
 html, body {
   padding: 0;
@@ -37,6 +37,9 @@ button {
 
 /* ----- WIDE SCREEN ----- */
 @media (min-width: 600px) {
+  :root {
+    --padding: 30px;
+  }
   ::-webkit-scrollbar { width: 15px; height: 15px; }
   ::-webkit-scrollbar-track { background-color: #0000ff; }
   ::-webkit-scrollbar-thumb {
