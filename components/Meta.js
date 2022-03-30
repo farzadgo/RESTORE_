@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { title, description, keywords } from '../config/sitedata'
-import og from '../public/og.png'
 
 const Meta = () => {
   return (
@@ -10,7 +9,7 @@ const Meta = () => {
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="theme-color" content="#0000ff"></meta>
-      <meta name="image" content={og} />
+      <meta name="image" content="/og.png" />
 
       <title>{title}</title>
       <link rel="icon" href="/favicon.ico" />
