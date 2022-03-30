@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+  width: calc(100vw - 15px);
+  display: grid;
+  grid-template-columns: 290px 370px;
+  justify-content: center;
+  background-color: #000;
+}
+.logo {
+  margin: 30px 0;
+  height: 60px;
+  max-width: 100%;
+  position: relative;
+}
+
+/* ----------- mobile ----------- */
+@media (max-width: 720px) {
+  .container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    padding: 10px 0;
+  }
+  .logo {
+    margin: 6px 0;
+  }
+}

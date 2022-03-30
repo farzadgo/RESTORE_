@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import Menu from '../components/Menu'
-import Spinner from '../components/Spinner'
+// import Spinner from '../components/Spinner'
+import Logos from '../components/Logos'
 import { debounce } from '../config/helpers'
 import Paragraph from '../components/Paragraph'
 import { useRouter } from 'next/router'
@@ -150,6 +151,8 @@ const Home = () => {
           {content && content.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
         </div>
       </section>
+
+      <Logos />
 
     </div>
   )
