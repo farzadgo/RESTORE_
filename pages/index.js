@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
-import Spinner from '../components/Spinner'
 import Menu from '../components/Menu'
 import { debounce } from '../config/helpers'
 import Paragraph from '../components/Paragraph'
@@ -19,7 +18,7 @@ import dynamic from 'next/dynamic'
 const Model = dynamic(
   () => import('../components/Model'), {
     ssr: false,
-    loading: () => <div><Spinner /></div>
+    loading: () => <div> ••• </div>
   }
 )
 
