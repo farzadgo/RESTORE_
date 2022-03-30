@@ -19,13 +19,25 @@ const Model = () => {
   const [initialCameraPosition] = useState(new THREE.Vector3(initialCamX, initialCamY, initialCamZ))
 
   const handleWindowResize = useCallback(() => {
+    // MAKE IT WHEN MOBILE SCREEN THE ZOOM/Z CHANGES
+    // ALSO MAYBE AUTO ROTATE
     const { current: container } = refBody
     if (container && renderer) {
-      const scW = container.clientWidth
-      const scH = container.clientHeight
-      renderer.setSize(scW, scH)
+      renderer.setSize(container.clientWidth, container.clientHeight)
     }
   }, [renderer])
+
+  const handleMouseMove = useCallback(event => {
+    const { current: container } = refBody
+    if (container && camera) {
+      let halfW = container.clientWidth / 2
+      let halfH = container.clientHeight / 2
+      let mX = (event.clientX - halfW) / 2
+      let mY = (event.clientY - halfH) / 2
+      camera.position.x += ((mX * 0.005 - camera.position.x) + initialCamX)
+      camera.position.y += ((mY * 0.005 - camera.position.y) + initialCamY)
+    }
+  }, [camera])
 
 
   useEffect(() => {
@@ -33,16 +45,6 @@ const Model = () => {
     if (container && !renderer) {
       const sceneW = container.clientWidth
       const sceneH = container.clientHeight
-
-      // ---------- MOUSE MOVE ---------- useCallback !?
-      const handleMouseMove = event => {
-        let halfW = container.clientWidth / 2
-        let halfH = container.clientHeight / 2
-        let mX = (event.clientX - halfW) / 2
-        let mY = (event.clientY - halfH) / 2
-        camera.position.x += ((mX * 0.005 - camera.position.x) + initialCamX)
-        camera.position.y += ((mY * 0.005 - camera.position.y) + initialCamY)
-      }
 
       // ---------- TEXTURE ----------
       const path = 'textures/'
@@ -74,13 +76,13 @@ const Model = () => {
       // const scale = scH * 0.08 + 4
       // const camera = new THREE.OrthographicCamera(-scale, scale, scale, -scale / 2, 0.01, 50000)
       const camera = new THREE.PerspectiveCamera(45, sceneW / sceneH, 1, 2000)
+
       // camera.position.set(10, 2, 4)
       // camera.position.z = 4
-      // --- IMPORTANT ---
+      // !!! IMPORTANT !!!
       camera.position.copy(initialCameraPosition)
 
-      // camera.aspect = sceneW / sceneH
-
+      camera.aspect = sceneW / sceneH
       camera.updateProjectionMatrix()
       setCamera(camera)
 
@@ -141,11 +143,8 @@ const Model = () => {
         renderer.render(scene, camera)        
       }
 
-      document.addEventListener('mousemove', handleMouseMove)
-
       return () => {
         console.log('renderer unmount')
-        document.removeEventListener('mousemove', handleMouseMove)
         cancelAnimationFrame(req)
         renderer.dispose()
       }
@@ -154,14 +153,13 @@ const Model = () => {
 
 
   useEffect(() => {
-    window.addEventListener('resize', handleWindowResize, false)
-    // document.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('resize', handleWindowResize)
+    document.addEventListener('mousemove', handleMouseMove)
     return () => {
-      console.log('Model.js unmounted')
-      window.removeEventListener('resize', handleWindowResize, false)
-      // document.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('resize', handleWindowResize)
+      document.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [renderer, handleWindowResize])
+  }, [renderer, handleWindowResize, handleMouseMove])
 
 
   return (
