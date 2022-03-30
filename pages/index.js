@@ -20,8 +20,9 @@ const Model = dynamic(() => import('../components/Model'), {
   ssr: false,
   loading: function() {
     return (
-      // <div> ••• </div>
-      <Spinner />
+      <div>
+        <Spinner />
+      </div>
     )
   }
 })
