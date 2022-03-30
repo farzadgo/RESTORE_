@@ -23,7 +23,9 @@ const Model = dynamic(
   }
 )
 
-const Home = () => {
+Model.displayName = 'Model'
+
+function Home() {
   
   const router = useRouter()
   const [toggle, setToggle] = useState(false)
