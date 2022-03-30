@@ -18,13 +18,13 @@ import dynamic from 'next/dynamic'
 
 const Model = dynamic(() => import('../components/Model'), {
   ssr: false,
-  loading: function() {
-    return (
-      <div>
-        <Spinner />
-      </div>
-    )
-  }
+  // loading: function() {
+  //   return (
+  //     <div>
+  //       <Spinner />
+  //     </div>
+  //   )
+  // }
 })
 
 const Home = () => {
