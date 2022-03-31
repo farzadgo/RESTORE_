@@ -46,7 +46,7 @@
 }
 
 /* ------------------------------- */
-.parag:last-child {
+.parag:nth-child(7) {
   font-size: 1.2em;
   font-style: italic;
   color: #eee;

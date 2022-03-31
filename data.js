@@ -85,6 +85,14 @@ export const opencall = [
         body: [
           'RESTORE_ is the inaugural facilitatory project initiated by <strong>hacer sitio corp</strong>, a group of international artists based in Bremen working in the intersection of research, performance, dance, media/audiovisual art, design, and architecture.'
         ]
+      },
+      {
+        id: '9',
+        group: 'fund',
+        title: '',
+        body: [
+          'RESTORE_ is supported by "Nationales Performance Netz - STEPPING OUT" as part of “NEUSTART KULTUR”, a program of the Federal Government Commissioner for Culture and the Media and Senator für Kultur Bremen.'
+        ]
       }
     ]
   },
@@ -172,6 +180,14 @@ export const opencall = [
         title: '',
         body: [
           'RESTORE_ ist das Startprojekt von <strong>hacer sitio corp</strong>, einer Gruppe internationaler Künstler*innen mit Sitz in Bremen. Sie arbeiten an der Schnittstelle von Forschung, Performance, Tanz, Medien- und audiovisueller Kunst, Design und Architektur.'
+        ]
+      },
+      {
+        id: '9',
+        group: 'fund',
+        title: '',
+        body: [
+          'RESTORE_ wird gefördert durch "Nationales Performance Netz - STEPPING OUT" im Rahmen von "NEUSTART KULTUR", einem Programm der Beauftragten der Bundesregierung für Kultur und Medien und des Senators für Kultur Bremen.'
         ]
       }
     ]

@@ -52,7 +52,7 @@
 
 /* ------------------------------- */
 .call {
-  padding: var(--header-height) 0;
+  padding: 2.4em 0;
   min-height: 100vh;
   background-color: black;
   background-image: radial-gradient(#464646 1px, transparent 0);
@@ -97,38 +97,6 @@
 }
 .menubut {
   bottom: var(--padding);
-}
-
-/* ------------------------------- */
-.scroller {
-  position: absolute;
-  bottom: 0;
-  max-width: 100%;
-  overflow: hidden;
-  background: #0000ff;
-  color: #eee;
-  font-size: 3em;
-  font-weight: 300;
-  padding: 0;
-  height: var(--header-height);
-}
-.marquee {
-  white-space: nowrap;
-  overflow: hidden;
-  display: inline-block;
-  animation: marquee 14s linear infinite;
-}
-.marquee p {
-  display: inline-block;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
 }
 
 /* ------------ MEDIUM ----------- */

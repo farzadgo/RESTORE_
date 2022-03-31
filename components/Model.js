@@ -53,7 +53,7 @@ const Model = () => {
 
       // ---------- TEXTURE ----------
       const path = 'textures/'
-      const format = '.png'
+      const format = '.jpg'
       const urls = [
         path + 'px' + format, path + 'nx' + format,
         path + 'py' + format, path + 'ny' + format,
@@ -147,6 +147,8 @@ const Model = () => {
 
         renderer.render(scene, camera)        
       }
+
+      console.log('renderer mounted')
 
       return () => {
         console.log('renderer unmount')

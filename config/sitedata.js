@@ -1,11 +1,11 @@
 module.exports = {
   title: 'RESTORE_',
   description: 'RESTORE_interdisciplinary performances in context',
-  keywords: 'performance, live, dance, non-place, empty spaces, abandoned shops,interdisciplinary, art, sound, visual, dance, contextual, in-situ',
-  siteUrl: 'https://restore-bremen.space',
-  authorName: 'hacer sitio corp',
+  keywords: 'performance, live, dance, non-place, empty spaces, bremen, abandoned shops, interdisciplinary, art, sound, visual, dance, contextual, in-situ',
+  url: 'https://restore-bremen.space',
   email: 'contact@restore-bremen.space',
-  // image: '/og.png',
+  image: '/og.png',
+  author: 'hacer sitio corp.',
 
   links: {
     openEN: 'https://cloud.disorient.xyz/s/nfiBGY7eEKFDkH4/download/RESTORE_EN_Open.pdf',

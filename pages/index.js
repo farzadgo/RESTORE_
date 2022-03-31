@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import styles from '../styles/Home.module.css'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { debounce } from '../config/helpers'
 import Menu from '../components/Menu'
 import Logos from '../components/Logos'
-import { debounce } from '../config/helpers'
+import Scroller from '../components/Scroller'
 import Paragraph from '../components/Paragraph'
-import { useRouter } from 'next/router'
-import dynamic from 'next/dynamic'
+import styles from '../styles/Home.module.css'
 
 // import { server } from '../config'
 // export const getStaticProps = async () => {
@@ -35,6 +36,7 @@ const Home = () => {
   const [width, setWidth] = useState(900)
 
   const [content, setContent] = useState('')
+  const [funding, setFunding] = useState('')
   const [lang, setLang] = useState('en')
 
   const [activeParag, setActiveParag] = useState('intro')
@@ -90,7 +92,8 @@ const Home = () => {
       const response = await fetch('/api')
       const data = await response.json()
       const cont = await data.filter(e => e.lang === lang)[0].data
-      setContent(cont)
+      setContent(cont.filter(e => e.group !== 'fund'))
+      setFunding(cont.filter(e => e.group === 'fund'))
     }
     fetchData()
 
@@ -123,20 +126,7 @@ const Home = () => {
           <a href='#call'> {subtitles.readmore} ↓ </a>
         </div>
 
-        <div className={styles.scroller}>
-          <div className={styles.marquee}>
-            <p>
-              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
-              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
-              &nbsp;
-            </p>
-            <p>
-              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
-              OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
-              &nbsp;
-            </p>
-          </div>
-        </div>
+        <Scroller />
 
         <Model />
 
@@ -151,7 +141,7 @@ const Home = () => {
         </div>
       </section>
 
-      <Logos />
+      <Logos funding={funding} />
 
     </div>
   )
