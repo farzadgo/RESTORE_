@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import modelimage from '../public/glass-body.png'
 import { useRouter } from 'next/router'
 import { debounce } from '../config/helpers'
 import Menu from '../components/Menu'
@@ -34,6 +36,7 @@ const Home = () => {
   const [toggle, setToggle] = useState(false)
   const toggler = () => setToggle(prev => !prev)
   const [width, setWidth] = useState(900)
+  const [desktop, setDesktop] = useState(true)
 
   const [content, setContent] = useState('')
   const [funding, setFunding] = useState('')
@@ -85,7 +88,16 @@ const Home = () => {
 
   const handleResize = debounce(() => {
     setWidth(window.innerWidth)
+    handleDesktop()
   }, 1000)
+
+  const handleDesktop = () => {
+    if (window.innerWidth > 600) {
+      setDesktop(true)
+    } else {
+      setDesktop(false)
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,8 +112,8 @@ const Home = () => {
     setSubtitles({...words.en})
     handleSubtitles()
 
+    handleDesktop()
     setWidth(window.innerWidth)
-
     window.addEventListener('resize', handleResize)
 
     return () => {
@@ -128,7 +140,8 @@ const Home = () => {
 
         <Scroller />
 
-        <Model />
+        {desktop && <Model />}
+        {!desktop && <div className={styles.modelimage}> <Image src={modelimage} width={400} height={405} /> </div>}
 
       </section>
 
