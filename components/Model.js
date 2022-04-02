@@ -16,7 +16,7 @@ const Model = () => {
   const [scene] = useState(new THREE.Scene())
   const [camera, setCamera] = useState()
   const [target] = useState(new THREE.Vector3(0, 0, 0))
-  const [initialCamPosition, setInitialCamPosition] = useState(new THREE.Vector3(initialCamX, initialCamY, initialCamZ))
+  const [initialCamPosition] = useState(new THREE.Vector3(initialCamX, initialCamY, initialCamZ))
 
   const handleWindowResize = useCallback(() => {
     const { current: container } = refBody
@@ -71,7 +71,7 @@ const Model = () => {
       setRenderer(renderer)
 
       // ---------- CAMERA ----------
-      // const scale = scH * 0.08 + 4
+      // const scale = sceneH * 0.08 + 4
       // const camera = new THREE.OrthographicCamera(-scale, scale, scale, -scale / 2, 0.01, 50000)
       const camera = new THREE.PerspectiveCamera(45, sceneW / sceneH, 1, 2000)
 
@@ -101,21 +101,14 @@ const Model = () => {
       //   refractionRatio: 0.9,
       //   reflectivity: 0.6
       // })
-			// const cubeMaterial = new THREE.MeshLambertMaterial({
-      //   color: 0xffffff,
-      //   envMap: refractionCube,
-      //   refractionRatio: 0.95
-      // })
       const cubeMaterial = new THREE.MeshLambertMaterial({
         color: 0x0000ff,
         envMap: reflectionCube,
+        // color: 0xffffff,
+        // envMap: refractionCube,
         combine: THREE.MixOperation,
         reflectivity: 0.95
       })
-			// const cubeMaterial = new THREE.MeshLambertMaterial({
-      //   color: 0x0000ff,
-      //   envMap: reflectionCube
-      // })
 
       // ---------- LOAD MODEL ----------
       loadOBJModel(scene, '/models/glass.obj', cubeMaterial, {
@@ -129,9 +122,8 @@ const Model = () => {
       // ---------- ANIMATE ----------
       let req
       const animate = () => {
-        // const timer = Date.now() * 0.0005;
-        // camera.position.set(Math.cos( timer ) * 3, 1, Math.sin( timer ) * 3)
-        // camera.position.set(Math.cos( timer ) * -3, 1, mY * .05)
+        // const timer = Date.now() * 0.0005
+        // camera.position.set(Math.cos(timer) * 3, 1, Math.sin(timer) * 3)
         req = requestAnimationFrame(animate)
 
         // --- ONLY WORKS HERE ---
@@ -163,8 +155,8 @@ const Model = () => {
 
 
   return (
-    <div style={{ position: 'absolute', width: 'calc(100vw - 20px)', height: '100vh' }}>
-      <div ref={refBody} style={{ position: 'absolute', height: '100%', width: '100%', background: 'transparent' }}>
+    <div style={{position: 'absolute', width: 'calc(100vw - 20px)', height: '100vh'}}>
+      <div ref={refBody} style={{position: 'absolute', height: '100%', width: '100%', background: 'transparent'}}>
         {loading && <Spinner />}
       </div>
     </div>

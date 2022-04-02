@@ -5,7 +5,7 @@
   justify-content: center;
   background-color: black;
   color: #eee;
-  padding: var(--padding);
+  padding: 20px 30px;
 }
 .sponsorship p {
   font-size: 1em;
@@ -14,7 +14,6 @@
   font-family: var(--sans-font);
   max-width: 880px;
 }
-
 .logocontainer {
   position: relative;
   /* width: calc(100vw - 15px); */

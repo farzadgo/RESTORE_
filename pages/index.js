@@ -100,6 +100,7 @@ const Home = () => {
   }
 
   useEffect(() => {
+
     const fetchData = async () => {
       const response = await fetch('/api')
       const data = await response.json()
@@ -130,7 +131,6 @@ const Home = () => {
       <button onClick={toggler} className={styles.menubut}> ☰ </button>
 
       <section className={styles.landing} id='landing'>
-
         <div className={styles.landingprime}>
           <h1>RESTORE_</h1>
           <h2> {subtitles.title} </h2>
@@ -140,9 +140,12 @@ const Home = () => {
 
         <Scroller />
 
-        {desktop && <Model />}
-        {!desktop && <div className={styles.modelimage}> <Image src={modelimage} width={400} height={405} /> </div>}
-
+        { desktop ?
+          <Model /> :
+          <div className={styles.modelimage}>
+            <Image src={modelimage} width={400} height={405} />
+          </div>
+        }
       </section>
 
       <section className={styles.call} id='call'>

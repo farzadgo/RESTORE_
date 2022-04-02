@@ -10,7 +10,7 @@ const Footer = () => {
     padding: '0 var(--padding)',
     justifyContent: 'start',
     fontSize: '1em',
-    fontWeight: '400',
+    fontWeight: '300',
     fontFamily: 'var(--space-font)'
   }
   return (
