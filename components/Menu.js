@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { langs, useLang } from '../components/Layout'
 import * as Icon from 'react-feather'
 import * as styles from '../styles/Menu.module.css'
 import { contact, links } from '../config/sitedata'
 
-const Menu = ({ setToggle, content, lang, setActive }) => {
+const Menu = ({ setToggle, opencall, setActive }) => {
+
+  const { lang } = useLang()
 
   const [dlInfo, setDlInfo] = useState({ })
 
@@ -56,10 +60,10 @@ const Menu = ({ setToggle, content, lang, setActive }) => {
   }
 
   useEffect(() => {
-    if (lang === 'en') {
+    if (lang === langs.en) {
       setDlInfo({...dlDaten.en})
     }
-    if (lang === 'de') {
+    if (lang === langs.de) {
       setDlInfo ({...dlDaten.de})
     }
     // return () => {}
@@ -77,10 +81,15 @@ const Menu = ({ setToggle, content, lang, setActive }) => {
 
       <nav className={styles.nav}>
         <ul>
+          {/* <li>
+            <Link href="/about">
+              <a>{lang === langs.en ? 'about' : 'über uns'}</a>
+            </Link>
+          </li> */}
           <li onClick={setToggle}>
             <a href='#call'> OPEN CALL </a>
           </li>
-          {content && content.map((e, i) => <li onClick={() => handleMenuItem(e.group)} key={i}>
+          {opencall && opencall.map((e, i) => <li onClick={() => handleMenuItem(e.group)} key={i}>
             <span>{e.title}</span>
           </li>)}
           <li>

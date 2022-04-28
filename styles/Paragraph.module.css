@@ -45,15 +45,6 @@
   margin-bottom: 0.6em;
 }
 
-/* ------------------------------- */
-.parag:nth-child(7) {
-  font-size: 1.2em;
-  font-style: italic;
-  color: #eee;
-  border: none;
-  border: 1px solid #0000ff;
-}
-
 /* ------------ MEDIUM ----------- */
 @media (max-width: 900px) and (min-width: 600px) {
   .parag {
@@ -73,15 +64,12 @@
   .parag h3 {
     font-size: 1.6em;
   }
-  .parag:nth-child(6) h3 {
+  .parag:last-child h3 {
     word-break: break-all;
   }
   .paragbody {
     padding: 0;
     line-height: 1.4em;
-  }
-  .parag:last-child {
-    font-size: 1em;
   }
   .paraglist > ul  {
     padding: 10px 0 20px 1.4em;

@@ -8,6 +8,7 @@ import Menu from '../components/Menu'
 import Logos from '../components/Logos'
 import Scroller from '../components/Scroller'
 import Paragraph from '../components/Paragraph'
+import { langs, useLang } from '../components/Layout'
 import styles from '../styles/Home.module.css'
 
 // import { server } from '../config'
@@ -33,14 +34,16 @@ const Model = dynamic(() => import('../components/Model'), {
 const Home = () => {
   
   const router = useRouter()
+  const {lang, setLang} = useLang()
+
   const [toggle, setToggle] = useState(false)
   const toggler = () => setToggle(prev => !prev)
+
   const [width, setWidth] = useState(900)
   const [desktop, setDesktop] = useState(true)
 
-  const [content, setContent] = useState('')
+  const [opencall, setOpencall] = useState('')
   const [funding, setFunding] = useState('')
-  const [lang, setLang] = useState('en')
 
   const [activeParag, setActiveParag] = useState('intro')
   const setActive = (group) => {
@@ -71,19 +74,15 @@ const Home = () => {
   }
 
   const handleSubtitles = () => {
-    if (lang === 'en') {
+    if (lang === langs.en) {
       setSubtitles({...subtitles, ...words.en})
     } else {
       setSubtitles({...subtitles, ...words.de})
     }
   }
 
-  const handleLang = () => {
-    if (lang === 'en') {
-      setLang('de')
-    } else {
-      setLang('en')
-    }
+  const toggleLang = () => {
+    setLang(lang === langs.en ? langs.de : langs.en )
   }
 
   const handleResize = debounce(() => {
@@ -105,7 +104,7 @@ const Home = () => {
       const response = await fetch('/api')
       const data = await response.json()
       const cont = await data.filter(e => e.lang === lang)[0].data
-      setContent(cont.filter(e => e.group !== 'fund'))
+      setOpencall(cont.filter(e => e.group === 'call')[0].data)
       setFunding(cont.filter(e => e.group === 'fund'))
     }
     fetchData()
@@ -125,9 +124,11 @@ const Home = () => {
   return (
     <div className={styles.home} >
 
-      {toggle && <Menu setToggle={toggler} content={content} lang={lang} setActive={setActive}/>}
+      {toggle && <Menu setToggle={toggler} opencall={opencall} lang={lang} setActive={setActive}/>}
 
-      <button onClick={handleLang} className={styles.langbut}>{lang === 'de' ? 'EN' : 'DE'}</button>
+      <button onClick={toggleLang} className={styles.langbut}>
+        {lang === langs.en ? 'DE' : 'EN'}
+      </button>
       <button onClick={toggler} className={styles.menubut}> ☰ </button>
 
       <section className={styles.landing} id='landing'>
@@ -153,7 +154,7 @@ const Home = () => {
           <h3>{subtitles.deadline}</h3>
         </div>
         <div className={styles.callparags}>
-          {content && content.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
+          {opencall && opencall.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
         </div>
       </section>
 

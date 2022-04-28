@@ -1,0 +1,50 @@
+.about {
+  min-height: calc(100vh - var(--header-height));
+  background-color: black;
+  color: #eee;
+}
+
+/* ------------------------------- */
+.buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+}
+.langbut,
+.backbut {
+  position: absolute;
+  background: #0000ff;
+  font-family: var(--space-font);
+  color: #f0ecf1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  z-index: 5;
+  right: var(--padding);
+  width: 60px;
+  height: 60px;
+  font-size: 1.6em;
+  border: none;
+  cursor: pointer;
+  /* padding: 0.2em; */
+}
+.langbut {
+  top: var(--padding);
+}
+.backbut {
+  bottom: var(--padding);
+}
+
+/* ------------------------------- */
+.individual {
+  width: 900px;
+  font-size: 1.2em;
+  font-family: var(--space-font);
+  padding: 1em;
+  margin-bottom: 1em;
+}
