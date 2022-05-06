@@ -12,6 +12,8 @@ const About = () => {
   const [about, setAbout] = useState('')
   const [width, setWidth] = useState(900)
 
+  // console.log(about);
+
   const toggleLang = () => {
     setLang(lang === langs.en ? langs.de : langs.en )
   }
@@ -54,7 +56,7 @@ const About = () => {
         </button>
       </div>
 
-      {about && about.map(e => <Individual key={e.id} content={e.body} width={width}/>)}
+      {about && about.map(e => <Individual key={e.id} content={e} width={width}/>)}
 
     </div>
   )
@@ -66,17 +68,20 @@ export default About
 
 const Individual = ({ content, width }) => {
 
-  const paragstyle = {
-    width: width * 0.9
-  }
+  // const paragstyle = {
+  //   width: width * 0.9
+  // }
+
+  // console.log(content);
 
   const createMarkup = (string) => {
     return {__html: string}
   }
 
   return (
-    <div className={styles.individual} style={paragstyle}>
-      {typeof content[0] === 'string' && <p dangerouslySetInnerHTML={createMarkup(content[0])} /> }
+    <div className={styles.individual} >
+      {content.title && <h3>{content.title}</h3>}
+      {typeof content.body && <p dangerouslySetInnerHTML={createMarkup(content.body)} /> }
     </div>
   )
 }

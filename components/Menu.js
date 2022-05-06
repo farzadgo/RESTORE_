@@ -81,11 +81,11 @@ const Menu = ({ setToggle, opencall, setActive }) => {
 
       <nav className={styles.nav}>
         <ul>
-          {/* <li>
+          <li>
             <Link href="/about">
               <a>{lang === langs.en ? 'about' : 'über uns'}</a>
             </Link>
-          </li> */}
+          </li>
           <li onClick={setToggle}>
             <a href='#call'> OPEN CALL </a>
           </li>

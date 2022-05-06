@@ -2,6 +2,7 @@
   min-height: calc(100vh - var(--header-height));
   background-color: black;
   color: #eee;
+  padding: 80px 40px 10px;
 }
 
 /* ------------------------------- */
@@ -16,7 +17,7 @@
 }
 .langbut,
 .backbut {
-  position: absolute;
+  position: fixed;
   background: #0000ff;
   font-family: var(--space-font);
   color: #f0ecf1;
@@ -31,7 +32,6 @@
   font-size: 1.6em;
   border: none;
   cursor: pointer;
-  /* padding: 0.2em; */
 }
 .langbut {
   top: var(--padding);
@@ -42,9 +42,27 @@
 
 /* ------------------------------- */
 .individual {
-  width: 900px;
-  font-size: 1.2em;
   font-family: var(--space-font);
-  padding: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 80px;
+}
+.individual h3 {
+  padding-bottom: 20px;
+  font-size: 3em;
+  font-weight: 400;
+}
+.individual p {
+  padding-left: 2em;
+  font-size: 2em;
+  font-weight: 300;
+}
+
+
+@media (max-width: 600px) {
+  .individual h3 {
+    font-size: 2.6em;
+  }
+  .individual p {
+    padding-left: 0;
+    font-size: 1.4em;
+  }
 }
