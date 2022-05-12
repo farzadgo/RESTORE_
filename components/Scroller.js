@@ -5,13 +5,13 @@ const Scroller = () => {
     <div className={styles.scroller}>
       <div className={styles.marquee}>
         <p>
-          OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
-          OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
+          RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_
+          RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_
           &nbsp;
         </p>
         <p>
-          OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
-          OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL ! OPEN CALL !
+          RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_
+          RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_ RESTORE_
           &nbsp;
         </p>
       </div>
