@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { langs, useLang } from '../components/Layout'
 import { useRouter } from 'next/router'
 import { debounce } from '../config/helpers'
+import Menu from '../components/Menu'
 import * as Icon from 'react-feather'
 import * as styles from '../styles/About.module.css'
 
@@ -12,7 +13,8 @@ const About = () => {
   const [about, setAbout] = useState('')
   const [width, setWidth] = useState(900)
 
-  // console.log(about);
+  const [toggle, setToggle] = useState(false)
+  const toggler = () => setToggle(prev => !prev)
 
   const toggleLang = () => {
     setLang(lang === langs.en ? langs.de : langs.en )
@@ -47,6 +49,8 @@ const About = () => {
   return (
     <div className={styles.about}>
 
+    {toggle && <Menu setToggle={toggler} lang={lang}/>}
+
       <div className={styles.buttons}>
         <button onClick={toggleLang} className={styles.langbut}>
           {lang === langs.en ? 'DE' : 'EN'}
@@ -54,6 +58,7 @@ const About = () => {
         <button onClick={backer} className={styles.backbut}>
           <Icon.ArrowLeft {...iconProps}/>
         </button>
+        <button onClick={toggler} className={styles.menubut}> ☰ </button>
       </div>
 
       {about && about.map(e => <Individual key={e.id} content={e} width={width}/>)}

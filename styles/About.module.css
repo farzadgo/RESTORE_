@@ -1,8 +1,9 @@
 .about {
-  min-height: calc(100vh - var(--header-height));
+  /* min-height: calc(100vh - var(--header-height)); */
+  min-height: 100vh;
   background-color: black;
   color: #eee;
-  padding: 80px 40px 10px;
+  /* padding: 80px 40px 10px; */
 }
 
 /* ------------------------------- */
@@ -16,7 +17,8 @@
   min-height: 100vh;
 }
 .langbut,
-.backbut {
+.backbut,
+.menubut {
   position: fixed;
   background: #0000ff;
   font-family: var(--space-font);
@@ -37,13 +39,18 @@
   top: var(--padding);
 }
 .backbut {
+  /* bottom: var(--padding); */
+  top: calc(50% - 30px);  
+}
+.menubut {
   bottom: var(--padding);
 }
 
 /* ------------------------------- */
 .individual {
   font-family: var(--space-font);
-  margin-bottom: 80px;
+  /* margin-bottom: 80px; */
+  padding-bottom: 80px;
 }
 .individual h3 {
   padding-bottom: 20px;
@@ -55,7 +62,6 @@
   font-size: 2em;
   font-weight: 300;
 }
-
 
 @media (max-width: 600px) {
   .individual h3 {

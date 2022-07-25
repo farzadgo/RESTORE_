@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { langs, useLang } from '../components/Layout'
 import * as Icon from 'react-feather'
 import * as styles from '../styles/Menu.module.css'
@@ -10,6 +11,9 @@ const Menu = ({ setToggle, opencall, setActive }) => {
   const { lang } = useLang()
 
   const [dlInfo, setDlInfo] = useState({ })
+
+  const path = useRouter().pathname
+  // console.log(path)
 
   const dlDaten = {
     en: {
@@ -86,9 +90,14 @@ const Menu = ({ setToggle, opencall, setActive }) => {
               <a>{lang === langs.en ? 'about' : 'über uns'}</a>
             </Link>
           </li>
-          <li onClick={setToggle}>
-            <a href='#call'> OPEN CALL </a>
+          <li>
+            <Link href="/call22">
+              <a>Open Call 2022</a>
+            </Link>
           </li>
+          {/* <li onClick={setToggle}>
+            <a href='#call'> OPEN CALL </a>
+          </li> */}
           {opencall && opencall.map((e, i) => <li onClick={() => handleMenuItem(e.group)} key={i}>
             <span>{e.title}</span>
           </li>)}
