@@ -53,11 +53,20 @@ const Model = () => {
         path + 'pz' + format, path + 'nz' + format
       ]
 
-      const reflectionCube = new THREE.CubeTextureLoader().load(urls)
+      // -------- Loading Manager --------
+      const manager = new THREE.LoadingManager();
+      manager.onLoad = () => {
+        console.log("Loading complete!");
+      }
+      manager.onProgress = (url, itemsLoaded, itemsTotal) => console.log(`Items loaded: ${itemsLoaded}/${itemsTotal} (${url})`);
+      manager.onError = (url) => console.log('There was an error loading ' + url);
+
+      // -------- laod textures --------
+      const reflectionCube = new THREE.CubeTextureLoader(manager).load(urls)
       // scene.background = reflectionCube
 
-      const refractionCube = new THREE.CubeTextureLoader().load(urls)
-      refractionCube.mapping = THREE.CubeRefractionMapping
+      // const refractionCube = new THREE.CubeTextureLoader(manager).load(urls)
+      // refractionCube.mapping = THREE.CubeRefractionMapping
 
       // ---------- RENDERER ----------
       const renderer = new THREE.WebGLRenderer({
@@ -104,7 +113,6 @@ const Model = () => {
       const cubeMaterial = new THREE.MeshLambertMaterial({
         color: 0x0000ff,
         envMap: reflectionCube,
-        // color: 0xffffff,
         // envMap: refractionCube,
         combine: THREE.MixOperation,
         reflectivity: 0.95
@@ -118,6 +126,19 @@ const Model = () => {
         animate()
         setLoading(false)
       })
+
+      // --- ASYNC/AWAIT loading hints ---
+      /*
+      async function loadModel() {
+        let response = await fetch('api/data')
+        response = await response.json()
+        dataSet(response)
+      }
+
+      const loader = new GLTFLoader();
+
+      const loadedData = await loader.loadAsync('path/to/yourModel.glb')
+      */
 
       // ---------- ANIMATE ----------
       let req
