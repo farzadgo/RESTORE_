@@ -1,47 +1,32 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../styles/Paragraph.module.css'
 
-const Paragraph = ({ content, width, activeParag, setActive }) => {
+const Paragraph = ({content, body, width}) => {
 
-  const [cardWidth, setCardWidth] = useState('')
-  const [position, setPosition] = useState('')
+  const [cardWidth, setCardWidth] = useState(20)
+  const [position, setPosition] = useState(0)
 
   const paragStyle = {
     width: cardWidth,
     left: position
   }
-  
-  const bodyRef = useRef(null)
-  const [bodyHeight, setBodyHeight] = useState('')
 
-  const bodyStyle = {
-    height: bodyHeight,
-  }
-
-  const handleTitleClick = () => {
-    // e.preventDefault()
-    // bodyRef.current.style.background = 'blue'
-    setActive(content.group)
-  }
+  const [title, artistNames, address] = [content.TITLE, content.ARTISTS, content.ADDRESS]
+  const [area, day, month, year, time] = [content.AREA, content.DAY, content.MONTH, content.YEAR, content.TIME]
+  const [subtitle, setSubtitle] = useState(false)
 
   const createMarkup = (string) => {
     return {__html: string}
   }
 
-
-  useEffect(() => {
-    if (content.group !== 'intro' && content.group !== 'we') {
-      setBodyHeight(0)
-    }
-    if (content.group === activeParag) {
-      setBodyHeight('auto')
-    }
-
-    // return () => {}
-  }, [activeParag])
+  const handleDataReady = () => {
+    if (area && day && month && year && time) setSubtitle(true)
+  }
 
 
   useEffect(() => {
+    handleDataReady()
+    
     let offset
     if (width > 1700) {
       offset = width * 0.5
@@ -52,39 +37,24 @@ const Paragraph = ({ content, width, activeParag, setActive }) => {
     } else {
       offset = 0
     }
-    setCardWidth((width - offset) - 20)
+
+    if (width) setCardWidth((width - offset) - 20)
     setPosition((Math.random() * offset))
 
-    // if (width < 600) {
-    //   setCardWidth('100%')
-    //   setPosition('auto')
-    // }
-  
-    // return () => {}
   }, [width])
 
   return (
-    <div className={styles.parag} style={paragStyle} id={content.group}>
+    <div className={styles.container} style={paragStyle}>
 
-      {content.title && <h3 onClick={handleTitleClick}>{content.title}</h3>}
+      {title && <h1 className={styles.title}>{title}</h1>}
 
-      <div ref={bodyRef} className={styles.paragbody} style={bodyStyle}>
-        {content.body && content.body.map(e => {
-          let idone = Math.random().toString(36).substring(2, 15)
-          if (typeof e === 'string') {
-            return <p className={styles.paragprime} key={idone} dangerouslySetInnerHTML={createMarkup(e)} />
-          } else {
-            return <ul className={styles.paraglist} key={idone}>{e.map(p => {
-              let idtwo = Math.random().toString(36).substring(2, 15)
-              if (typeof p === 'string') {
-                return <li key={idtwo} dangerouslySetInnerHTML={createMarkup(p)} />
-              } else {
-                return <ul key={idtwo}>{p.map((e, i) => <li key={i} dangerouslySetInnerHTML={createMarkup(e)} />)}</ul>
-              }
-            })}</ul>
-          }
-        })}
-      </div>
+      {artistNames && <ul className={styles.artistNames}>{artistNames.map((a, i) => <h2 key={i}>{a}</h2>)}</ul>}
+
+      {subtitle && <h3 className={styles.subtitle}>{area} • {day}. {month} {year} • {time}H</h3>}
+
+      {address && <p className={styles.address}>{address}</p>}
+
+      {body && <div className={styles.article}>{body.map((e, i) => <p key={i} dangerouslySetInnerHTML={createMarkup(e)}/>)}</div>}
 
     </div>
   )

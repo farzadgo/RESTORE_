@@ -2,20 +2,18 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { langs, useLang } from '../components/Layout'
-import * as Icon from 'react-feather'
-import * as styles from '../styles/Menu.module.css'
 import { contact, links } from '../config/sitedata'
+import * as styles from '../styles/Menu.module.css'
+import * as Icon from 'react-feather'
 
-const Menu = ({ setToggle, opencall, setActive }) => {
+const Menu = ({setToggle, opencall, setActive}) => {
 
-  const { lang } = useLang()
-
-  const [dlInfo, setDlInfo] = useState({ })
-
+  const {lang} = useLang()
   const path = useRouter().pathname
-  // console.log(path)
 
-  const dlDaten = {
+  const [dlInfo, setDlInfo] = useState({})
+
+  const dlData = {
     en: {
       callTitle:'Open Call (EN)',
       callLink: links.openEN,
@@ -36,16 +34,18 @@ const Menu = ({ setToggle, opencall, setActive }) => {
     strokeWidth: 1.5
   }
 
-  useEffect(() => {
-    document.body.style.overflowY = 'hidden'
-    return () => {
-      document.body.style.overflowY = 'scroll'
-    }
-  }, [])
-
   const handleMenuItem = (group) => {
     setToggle()
     setActive(group)
+  }
+
+  const handleDlInfo = () => {
+    if (lang === langs.en) {
+      setDlInfo({...dlData.en})
+    }
+    if (lang === langs.de) {
+      setDlInfo ({...dlData.de})
+    }
   }
 
   const CloseMenu = ({ setToggle }) => {
@@ -63,14 +63,14 @@ const Menu = ({ setToggle, opencall, setActive }) => {
     )
   }
 
+
   useEffect(() => {
-    if (lang === langs.en) {
-      setDlInfo({...dlDaten.en})
+    handleDlInfo()
+
+    document.body.style.overflowY = 'hidden'
+    return () => {
+      document.body.style.overflowY = 'scroll'
     }
-    if (lang === langs.de) {
-      setDlInfo ({...dlDaten.de})
-    }
-    // return () => {}
   }, [])
   
 
@@ -86,29 +86,49 @@ const Menu = ({ setToggle, opencall, setActive }) => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <Link href="/about">
-              <a>{lang === langs.en ? 'about' : 'über uns'}</a>
+            <Link href='/'>
+              <a className={path === '/' ? 'activeLink' : ''}>
+                HOME <div className={styles.dlicon}><Icon.Box {...iconProps}/></div>
+              </a>
             </Link>
           </li>
+
           <li>
-            <Link href="/call22">
-              <a>Open Call 2022</a>
+            <Link href='/opencall'>
+              <a className={path === '/opencall' ? 'activeLink' : ''}>OPEN CALL 2022</a>
             </Link>
           </li>
-          {/* <li onClick={setToggle}>
-            <a href='#call'> OPEN CALL </a>
-          </li> */}
-          {opencall && opencall.map((e, i) => <li onClick={() => handleMenuItem(e.group)} key={i}>
-            <span>{e.title}</span>
-          </li>)}
+
+          {opencall && <div>
+            {opencall.map((e, i) => <li onClick={() => handleMenuItem(e.ID)} key={i}> <span>{e.TITLE}</span> </li>)}
+            <br />
+            {path === '/opencall' && <li>
+              <a href={dlInfo.callLink}> {dlInfo.callTitle} </a>
+              <div className={styles.dlicon}><Icon.Download {...iconProps}/></div>
+            </li>}
+            {path === '/opencall' && <li>
+              <a href={dlInfo.formLink}> {dlInfo.formTitle} </a>
+              <div className={styles.dlicon}><Icon.Download {...iconProps}/></div>
+            </li>}
+            <br />
+          </div>}
+
           <li>
-            <a href={dlInfo.callLink}> {dlInfo.callTitle} </a>
-            <div className={styles.dlicon}><Icon.Download {...iconProps}/></div>
+            <Link href='/documentation'>
+              <a className={path === '/documentation' ? 'activeLink' : ''}>
+                {lang === langs.en ? 'DOCUMENTATION 2022' : 'DOKUMENTATION 2022'}
+              </a>
+            </Link>
           </li>
+
           <li>
-            <a href={dlInfo.formLink}> {dlInfo.formTitle} </a>
-            <div className={styles.dlicon}><Icon.Download {...iconProps}/></div>
+            <Link href='/about'>
+              <a className={path === '/about' ? 'activeLink' : ''}>
+                {lang === langs.en ? 'ABOUT US' : 'ÜBER UNS'}
+              </a>
+            </Link>
           </li>
+
         </ul>
       </nav>
 

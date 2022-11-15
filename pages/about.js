@@ -1,92 +1,59 @@
 import { useEffect, useState } from 'react'
-import { langs, useLang } from '../components/Layout'
-import { useRouter } from 'next/router'
 import { debounce } from '../config/helpers'
+
+import { langs, useLang } from '../components/Layout'
 import Menu from '../components/Menu'
-import * as Icon from 'react-feather'
+import Buttons from '../components/Buttons'
+import Paragraph from '../components/Paragraph'
+
 import * as styles from '../styles/About.module.css'
+
 
 const About = () => {
 
-  const router = useRouter()
   const {lang, setLang} = useLang()
-  const [about, setAbout] = useState('')
-  const [width, setWidth] = useState(900)
-
   const [toggle, setToggle] = useState(false)
+
   const toggler = () => setToggle(prev => !prev)
+  const langToggler = () => setLang(lang === langs.en ? langs.de : langs.en)
 
-  const toggleLang = () => {
-    setLang(lang === langs.en ? langs.de : langs.en )
-  }
-
-  const backer = () => router.push('/')
+  const [width, setWidth] = useState(900)
+  const [about, setAbout] = useState('')
 
   const handleResize = debounce(() => {
     setWidth(window.innerWidth)
   }, 1000)
 
-  const iconProps = {
-    color: '#eee',
-    size: 36,
-    strokeWidth: 1.5
-  }
-
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/api')
+      const response = await fetch('/api/about')
       const data = await response.json()
-      const cont = await data.filter(e => e.lang === lang)[0].data
-      setAbout(cont.filter(e => e.group === 'about')[0].data)
+      const content = await data.filter(e => e.lang === lang)[0].data
+      setAbout(content.filter(e => e.ID === 'about')[0].data)
     }
     fetchData()
+
+    setWidth(window.innerWidth)
     window.addEventListener('resize', handleResize)
+
     return () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [lang])
 
   return (
-    <div className={styles.about}>
+    <div style={{overflowX: 'hidden'}}>
 
-    {toggle && <Menu setToggle={toggler} lang={lang}/>}
+      {toggle && <Menu setToggle={toggler} lang={lang}/>}
 
-      <div className={styles.buttons}>
-        <button onClick={toggleLang} className={styles.langbut}>
-          {lang === langs.en ? 'DE' : 'EN'}
-        </button>
-        <button onClick={backer} className={styles.backbut}>
-          <Icon.ArrowLeft {...iconProps}/>
-        </button>
-        <button onClick={toggler} className={styles.menubut}> ☰ </button>
-      </div>
+      <Buttons lang={lang} langs={langs} setLang={langToggler} setToggle={toggler}/>
 
-      {about && about.map(e => <Individual key={e.id} content={e} width={width}/>)}
+      <section className={styles.aboutParags}>
+        {about && about.map(e => <Paragraph content={e} body={e.BODY} width={width} key={e.ID}/>)}
+      </section>
 
     </div>
   )
 }
  
 export default About
-
-
-
-const Individual = ({ content, width }) => {
-
-  // const paragstyle = {
-  //   width: width * 0.9
-  // }
-
-  // console.log(content);
-
-  const createMarkup = (string) => {
-    return {__html: string}
-  }
-
-  return (
-    <div className={styles.individual} >
-      {content.title && <h3>{content.title}</h3>}
-      {typeof content.body && <p dangerouslySetInnerHTML={createMarkup(content.body)} /> }
-    </div>
-  )
-}

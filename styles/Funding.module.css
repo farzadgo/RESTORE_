@@ -31,14 +31,14 @@
   margin-bottom: 20px;
 }
 
-@media (max-width: 900px) and (min-width: 600px) {
+
+@media (max-width: 1299px) and (min-width: 800px) {
   .logocontainer {
     grid-template-columns: 240px 360px;
   }
 }
 
-/* ----------- MOBILE ----------- */
-@media (max-width: 600px) {
+@media (max-width: 799px) {
   .logocontainer {
     grid-template-columns: 1fr;
   }

@@ -9,13 +9,17 @@ const NotFound = () => {
     minHeight: 'calc(100vh - var(--header-height))',
     backgroundColor: 'black',
     color: '#eee',
-    fontSize: '1.2em'
+    fontSize: '1.2em',
+    fontFamily: 'var(--space-font)',
+    fontWeight: '300'
   }
   return (
     <div style={notFound}>
-      <p> Sorry, page not found!</p>
-      <span>______</span>
-      <Link href='/' > HOME </Link>
+      <p> no RESTORE_ page here ☹</p>
+      <br />
+      <Link href='/'>
+        <a><b>⮌ HOME</b></a>
+      </Link>
     </div>
   )
 }

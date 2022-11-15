@@ -1,77 +1,113 @@
-.parag {
+.container {
   position: relative;
   padding: 40px 40px 10px 40px;
   border: 1px solid #eee;
-  font-weight: 300;
+  font-family: var(--space-font);
   margin-bottom: 90px;
   font-size: 1.4em;
 }
-.parag h3 {
+.title {
   font-weight: 500;
-  font-size: 2.8em;
-  font-family: var(--space-font);
+  font-size: 2.6em;
   margin-bottom: 0.5em;
-  cursor: pointer;
 }
-.paragbody {
+.artistNames {
+  padding: 0;
+  list-style: none;
+  margin-bottom: 1.8em;
+}
+.artistNames h2 {
+  display: inline;
+  margin-right: 0.4em;
+  font-weight: normal;
+}
+.artistNames h2:nth-child(1)::after,
+.artistNames h2:nth-child(2)::after {
+  content: '•';
+  margin-left: 0.4em;
+}
+.subtitle {
+  margin-bottom: 1.6em;
+}
+.address {
+  font-size: 0.9em;
+  margin-bottom: 2em;
+}
+.article {
   padding-left: 100px;
   line-height: 1.6em;
+  font-family: var(--sans-font);
+  font-weight: 300;
   overflow: hidden;
   transition: all 0.3s;
   -moz-transition: all 0.3s;
   -webkit-transition: all 0.3s;
 }
-.paragprime {
-  margin-bottom: 1em;
+.article p {
+  margin-bottom: 0.4em;
 }
-.paraglist {
+.article > *:last-child {
+  margin-bottom: 30px;
+}
+.articleList {
   list-style: none;
   margin-bottom: 1em;
   padding: 0;
 }
-.paraglist > li::before {
+.articleList > li::before {
   content: "—";
   margin-right: 0.5em;
   font-weight: bold;
 }
-.paraglist > ul  {
+.articleList > ul  {
   list-style: none;
   padding: 10px 0 10px 1.2em;
   margin-bottom: 0.4em;
   font-size: 0.96em;
 }
-.paraglist > ul > li {
+.articleList > ul > li {
   line-height: 1.1em;
   margin-bottom: 0.6em;
 }
+  
 
-/* ------------ MEDIUM ----------- */
-@media (max-width: 900px) and (min-width: 600px) {
-  .parag {
+@media (max-width: 1299px) and (min-width: 800px) {
+  .container {
     font-size: 1.3em;
     margin-bottom: 60px;
     padding: 30px 30px 10px 30px;
   }
 }
 
-/* ------------ MOBILE ------------ */
-@media (max-width: 600px) {
-  .parag {
+
+@media (max-width: 799px) {
+  .container {
     font-size: 1.2em;
-    padding: 20px 10px 0 20px;
     margin-bottom: 30px;
+    padding: 20px 10px 0 20px;
   }
-  .parag h3 {
-    font-size: 1.6em;
+  .title {
+    font-size: 1.8em;
   }
-  .parag:last-child h3 {
-    word-break: break-all;
+  .artistNames h2 {
+    display: block;
+    font-size: 1.2em;
   }
-  .paragbody {
-    padding: 0;
+  .artistNames h2:nth-child(1)::after,
+  .artistNames h2:nth-child(2)::after {
+    content: '';
+  }
+  .subtitle {
+    font-size: 1.1em;
+  }
+  .address {
+    font-size: 0.8em;
+  }
+  .article {
+    padding-left: 0;
     line-height: 1.4em;
   }
-  .paraglist > ul  {
+  .articleList > ul  {
     padding: 10px 0 20px 1.4em;
   }
 }

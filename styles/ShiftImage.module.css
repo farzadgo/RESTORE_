@@ -1,0 +1,17 @@
+.imageContainer {
+  margin-bottom: 90px;
+}
+
+
+@media (max-width: 1299px) and (min-width: 800px) {
+  .imageContainer {
+    margin-bottom: 60px;
+  }
+}
+
+
+@media (max-width: 799px) {
+  .imageContainer {
+    margin-bottom: 30px;
+  }  
+}

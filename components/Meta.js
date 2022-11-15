@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { title, description, keywords, url, image, author } from '../config/sitedata'
+import {title, description, keywords, url, image, author} from '../config/sitedata'
 
 const Meta = () => {
   return (

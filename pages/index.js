@@ -1,76 +1,68 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import modelimage from '../public/glass-body.png'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
+import ReactPlayer from 'react-player'
+
 import { debounce } from '../config/helpers'
-import Menu from '../components/Menu'
-import Logos from '../components/Logos'
-import Scroller from '../components/Scroller'
-import Paragraph from '../components/Paragraph'
+import modelimage from '../public/glass-body.png'
+
 import { langs, useLang } from '../components/Layout'
+import Menu from '../components/Menu'
+import Buttons from '../components/Buttons'
+import Scroller from '../components/Scroller'
+import Funding from '../components/Funding'
+import Paragraph from '../components/Paragraph'
+
 import styles from '../styles/Home.module.css'
 
-// import { server } from '../config'
-// export const getStaticProps = async () => {
-//   const res = await fetch(`${server}/api`)
-//   const data = await res.json()
-//   return {
-//     props: { openCall: data }
-//   }
-// }
 
 const Model = dynamic(() => import('../components/Model'), {
-  ssr: false,
-  // loading: function() {
-  //   return (
-  //     <div>
-  //       <Spinner />
-  //     </div>
-  //   )
-  // }
+  ssr: false
 })
 
 const Home = () => {
-  
-  const router = useRouter()
+
   const {lang, setLang} = useLang()
-
   const [toggle, setToggle] = useState(false)
+
   const toggler = () => setToggle(prev => !prev)
+  const langToggler = () => setLang(lang === langs.en ? langs.de : langs.en)
 
+  const [desktop, setDesktop] = useState(false)
   const [width, setWidth] = useState(900)
-  const [desktop, setDesktop] = useState(true)
-
-  const [opencall, setOpencall] = useState('')
-  const [funding, setFunding] = useState('')
-
-  const [activeParag, setActiveParag] = useState('intro')
-  const setActive = (group) => {
-    setActiveParag(group)
-    router.push(`/#${group}`)
-  }
 
   const [subtitles, setSubtitles] = useState({
     title: '',
-    readmore: '',
+    opencall: '',
     dates: '',
-    deadline: ''
+    restore: '',
+    documentation: ''
   })
   
   const words = {
     en: {
       title:'INTERDISCIPLINARY PERFORMANCES IN CONTEXT',
-      readmore: 'Read More',
+      opencall: 'Open Call ➝',
       dates: 'Bremen 10 - 18 June 2022',
-      deadline: 'Deadline: 21 April 2022'
+      restore: ['RESTORE_ is a series of projects and performances through the temporary occupation of empty stores in the city of Bremen.'],
+      documentation: 'Documentation ➝'
     },
     de: {
       title:'INTERDISZIPLINÄRE PERFORMANCES IM KONTEXT',
-      readmore: 'Mehr lesen',
+      opencall: 'Open Call ➝',
       dates: 'Bremen 10 - 18 Juni 2022',
-      deadline: 'Bewerbungsfrist: 21 April 2022'
+      restore: ['RESTORE_ ist eine Projekt- und Performanceserie durch die temporäre Besetzung leerstehender Geschäfte in der Stadt Bremen.'],
+      documentation: 'Dokumentation ➝'
     }
+  }
+
+  const ModelImage = () => {
+    return (
+      <div style={{padding: '10px'}}>
+        <Image src={modelimage} width={390} height={390} />
+      </div>
+    )
   }
 
   const handleSubtitles = () => {
@@ -81,38 +73,26 @@ const Home = () => {
     }
   }
 
-  const toggleLang = () => {
-    setLang(lang === langs.en ? langs.de : langs.en )
-  }
-
   const handleResize = debounce(() => {
     setWidth(window.innerWidth)
-    handleDesktop()
+    if (window.innerWidth < 800) {
+      setDesktop(false)
+    } else {
+      setDesktop(true)
+    }
   }, 1000)
 
-  const handleDesktop = () => {
-    if (window.innerWidth > 600) {
-      setDesktop(true)
-    } else {
-      setDesktop(false)
-    }
-  }
 
   useEffect(() => {
-
-    const fetchData = async () => {
-      const response = await fetch('/api')
-      const data = await response.json()
-      const cont = await data.filter(e => e.lang === lang)[0].data
-      setOpencall(cont.filter(e => e.group === 'call')[0].data)
-      setFunding(cont.filter(e => e.group === 'fund'))
-    }
-    fetchData()
-
     setSubtitles({...words.en})
     handleSubtitles()
 
-    handleDesktop()
+    if (window.innerWidth < 800) {
+      setDesktop(false)
+    } else {
+      setDesktop(true)
+    }
+
     setWidth(window.innerWidth)
     window.addEventListener('resize', handleResize)
 
@@ -121,44 +101,70 @@ const Home = () => {
     }
   }, [lang])
 
+
+  const videoContainerRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const videoCallBack = (entries) => {
+    const [entry] = entries
+    setIsPlaying(entry.isIntersecting)
+  }
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.75
+  }
+
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(videoCallBack, options)
+    if (videoContainerRef.current) observer.observe(videoContainerRef.current)
+    return () => {
+      if (videoContainerRef.current) observer.unobserve(videoContainerRef.current)
+    }
+  }, [videoContainerRef, options])
+
+
   return (
-    <div className={styles.home} >
+    <div style={{overflowX: 'hidden'}} >
 
-      {toggle && <Menu setToggle={toggler} opencall={opencall} lang={lang} setActive={setActive}/>}
+      {toggle && <Menu setToggle={toggler} lang={lang} />}
 
-      <button onClick={toggleLang} className={styles.langbut}>
-        {lang === langs.en ? 'DE' : 'EN'}
-      </button>
-      <button onClick={toggler} className={styles.menubut}> ☰ </button>
+      <Buttons lang={lang} langs={langs} setLang={langToggler} setToggle={toggler} />
 
       <section className={styles.landing} id='landing'>
-        <div className={styles.landingprime}>
+        <div className={styles.landingtitles}>
           <h1>RESTORE_</h1>
           <h2> {subtitles.title} </h2>
           <p> {subtitles.dates} </p>
-          <a href='#call'> {subtitles.readmore} ↓ </a>
+          <Link href='/opencall'>
+            <a>{subtitles.opencall}</a>
+          </Link>
         </div>
-
         <Scroller />
-
-        { desktop ?
-          <Model /> :
-          <div className={styles.modelimage}>
-            <Image src={modelimage} width={400} height={405} />
-          </div>
-        }
+        {desktop ? <Model /> : <ModelImage />}
       </section>
 
-      <section className={styles.call} id='call'>
-        <div className={styles.calltitle}>
-          <h3>{subtitles.deadline}</h3>
+      <section className={styles.intro}>
+        <div className={styles.videoContainer} ref={videoContainerRef}>
+          <ReactPlayer
+            url='https://cloud.disorient.xyz/s/iopbKjwGMbERYpY/download/restore_intro_short.mp4'
+            width='100%'
+            height='100%'
+            // controls={true}
+            playing={isPlaying}
+            muted={true}
+            loop={true}
+            // onReady={e => console.log(e)}
+          />
         </div>
-        <div className={styles.callparags}>
-          {opencall && opencall.map(e => <Paragraph key={e.id} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
-        </div>
+        <Paragraph content={''} body={subtitles.restore} width={width}/>
+        <Link href='/documentation'>
+          <a>{subtitles.documentation}</a>
+        </Link>
       </section>
 
-      <Logos funding={funding} />
+      <Funding />
 
     </div>
   )

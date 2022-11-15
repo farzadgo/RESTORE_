@@ -1,19 +1,29 @@
 import { useState, useEffect } from 'react'
-import * as styles from '../styles/Logos.module.css'
+import * as styles from '../styles/Funding.module.css'
 import Image from 'next/image'
+
+import { useLang } from '../components/Layout'
 
 import beauftragte from '../public/fund-logos/01-beauftragte.jpg'
 import npn from '../public/fund-logos/02-npn.jpg'
 import neustart from '../public/fund-logos/03-neustart.jpg'
 import senator from '../public/fund-logos/04-senator.jpg'
 
-const Logos = ({ funding }) => {
+const Funding = () => {
+
+  const {lang} = useLang()
   const [body, setBody] = useState('')
+
   useEffect(() => {
-    if (funding) {
-      setBody(funding[0].body)
+    const fetchData = async () => {
+      const response = await fetch('/api/about')
+      const data = await response.json()
+      const content = await data.filter(e => e.lang === lang)[0].data
+      setBody(content.filter(e => e.ID === 'fund')[0].BODY)
     }
-  }, [funding])
+    fetchData()
+
+  }, [lang])
   
   return (
     <>
@@ -30,4 +40,4 @@ const Logos = ({ funding }) => {
   )
 }
  
-export default Logos
+export default Funding

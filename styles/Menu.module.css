@@ -67,6 +67,16 @@
   user-select: none;
   -webkit-user-select: none;
 }
+.nav li a {
+  display: flex;
+  align-items: center;
+}
+.nav ul > div {
+  margin-left: var(--padding);
+}
+.nav ul > div li:first-child {
+  display: none;
+}
 .nav span {
   cursor: pointer;
 }
@@ -80,14 +90,11 @@
   height: 100%;
 }
 
-/* ----------- mobile ----------- */
-@media (max-width: 600px) {
+
+@media (max-width: 699px) {
   .nav {
     justify-content: start;
     padding-left: 15px;
-  }
-  .close {
-    right: var(--padding);
   }
   .nav li {
     font-size: 1.4em;

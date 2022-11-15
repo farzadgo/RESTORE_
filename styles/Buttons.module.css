@@ -1,0 +1,42 @@
+.langbut,
+.menubut,
+.goUpBut {
+  position: fixed;
+  background: #0000ff;
+  border: none;
+  color: #eee;
+  font-size: 1.6em;
+  font-family: var(--space-font);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  z-index: 5;
+  width: 60px;
+  height: 60px;
+  right: var(--padding);
+  cursor: pointer;
+}
+.langbut {
+  top: var(--padding);
+}
+.menubut {
+  bottom: var(--padding);
+}
+.goUpBut {
+  top: calc(50vh - 30px)
+}
+
+
+@media (max-width: 600px) {
+  .langbut,
+  .menubut,
+  .goUpBut {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2em;
+  }
+  .goUpBut {
+    top: calc(50vh - 24px)
+  }
+}

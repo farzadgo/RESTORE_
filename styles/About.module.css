@@ -1,74 +1,18 @@
-.about {
-  /* min-height: calc(100vh - var(--header-height)); */
+.aboutParags {
+  color: #eee;
+  padding: 120px 0 40px;
   min-height: 100vh;
   background-color: black;
-  color: #eee;
-  /* padding: 80px 40px 10px; */
+  background-image: radial-gradient(#464646 1px, transparent 0);
+  background-size: 38px 38px;
 }
 
-/* ------------------------------- */
-.buttons {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  min-height: 100vh;
-}
-.langbut,
-.backbut,
-.menubut {
-  position: fixed;
-  background: #0000ff;
-  font-family: var(--space-font);
-  color: #f0ecf1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  z-index: 5;
-  right: var(--padding);
-  width: 60px;
-  height: 60px;
-  font-size: 1.6em;
-  border: none;
-  cursor: pointer;
-}
-.langbut {
-  top: var(--padding);
-}
-.backbut {
-  /* bottom: var(--padding); */
-  top: calc(50% - 30px);  
-}
-.menubut {
-  bottom: var(--padding);
-}
 
-/* ------------------------------- */
-.individual {
-  font-family: var(--space-font);
-  /* margin-bottom: 80px; */
-  padding-bottom: 80px;
-}
-.individual h3 {
-  padding-bottom: 20px;
-  font-size: 3em;
-  font-weight: 400;
-}
-.individual p {
-  padding-left: 2em;
-  font-size: 2em;
-  font-weight: 300;
-}
-
-@media (max-width: 600px) {
-  .individual h3 {
-    font-size: 2.6em;
-  }
-  .individual p {
-    padding-left: 0;
-    font-size: 1.4em;
+@media (max-width: 799px) {
+  .aboutParags {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 90px 0 20px;
   }
 }

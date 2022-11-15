@@ -1,6 +1,4 @@
-.home {
-  overflow-x: hidden;
-}
+/* --------------- SECTION 1 --------------- */
 .landing {
   display: flex;
   flex-direction: column;
@@ -13,8 +11,8 @@
   user-select: none;
   -webkit-user-select: none;
 }
-/* ------------------------------- */
-.landingprime {
+
+.landingtitles {
   position: absolute;
   top: 0;
   width: 100%;
@@ -22,153 +20,123 @@
   font-family: var(--space-font);
   z-index: 2;
 }
-.landingprime > * {
+.landingtitles > * {
   display: inline-block;
   position: absolute;
   line-height: 1em;
   font-weight: 300;
 }
-.landingprime h1 {
+.landingtitles h1 {
   font-size: 8em;
   top: 10%;
   left: 5%;
 }
-.landingprime h2 {
+.landingtitles h2 {
   font-size: 2.8em;
   top: 33%;
   right: 16%;
   width: 7em;
 }
-.landingprime p {
+.landingtitles p {
   font-size: 1.7em;
   top: 60%;
   left: 30%;
 }
-.landingprime a {
+.landingtitles a {
   font-size: 1.5em;
   top: 75%;
   left: 15%;
 }
 
-/* ------------------------------- */
-.call {
-  padding: 2.4em 0;
-  min-height: 100vh;
-  background-color: black;
-  background-image: radial-gradient(#464646 1px, transparent 0);
-  background-size: 38px 38px;
-}
-.calltitle,
-.callparags  {
-  position: relative;
-  color: #eee;
-}
-.calltitle {
-  margin-bottom: 40px ;
-  padding-left: 2em;
-  font-size: 2em;
-  font-family: var(--space-font);
-}
-.calltitle h3 {
-  font-weight: 300;
-}
 
-/* ------------------------------- */
-.langbut,
-.menubut {
-  position: fixed;
-  background: #0000ff;
-  font-family: var(--space-font);
-  color: #f0ecf1;
+/* -------------- SECTION 2 -------------- */
+.intro {
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  z-index: 5;
-  right: var(--padding);
-  width: 60px;
-  height: 60px;
-  font-size: 1.6em;
-  border: none;
-  cursor: pointer;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items:flex-start;
+  /* justify-content: center; */
+  background: #000;
+  color: #eee;
+  padding: 15vh 0;
+  font-family: var(--space-font);
 }
-.langbut {
-  top: var(--padding);
+.videoContainer {
+  position: relative;
+  /* background-color: #111111; */
+  width: 880px; /* 16:9 */
+  height: 495px; /* 16:9 */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: -20px;
 }
-.menubut {
-  bottom: var(--padding);
+.intro a {
+  margin: 0 auto;
+  font-size: 1.5em;
 }
 
 /* ------------ MEDIUM ----------- */
 @media (max-width: 900px) and (min-width: 600px) {
-  .landingprime h1 {
+  .landingtitles h1 {
     font-size: 6em;
   }
-  .landingprime h2 {
+  .landingtitles h2 {
     font-size: 2.4em;
   }
-  .callparags {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .intro {
+    padding: 160px 10px;
+  }
+  .videoContainer {
+    width: auto;
+    height: auto;
+    left: 0;
+    transform: none;
+    margin-bottom: 60px;
   }
 }
 
-/* ------------ MOBILE ------------ */
+/* ------------ SMALL ------------ */
 @media (max-width: 600px) {
-  .landingprime {
+  .landingtitles {
     padding: 0 var(--padding);
   }
-  .landingprime > * {
+  .landingtitles > * {
     display: block;
     position: relative;
   }
-  .landingprime h1 {
+  .landingtitles h1 {
     font-size: 3.6em;
     top: 12%;
     left: -0.05em;
   }
-  .landingprime h2 {
+  .landingtitles h2 {
     font-size: 1.7em;
     top: 22%;
     left: 0;
   }
-  .landingprime p {
+  .landingtitles p {
     font-size: 1.2em;
     top: 50%;
     left: 0;
   }
-  .landingprime a {
+  .landingtitles a {
     display: inline;
     font-size: 1.2em;
     top: 55%;
     left: 0;
   }
-
-  .call {
-    padding-bottom: 0;
+  .intro {
+    padding: 120px 10px;
   }
-  .calltitle {
-    padding-left: var(--padding);
-    font-size: 1.4em;
-  }
-  .callparags {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .langbut,
-  .menubut {
-    right: var(--padding);
-    width: 48px;
-    height: 48px;
+  .intro a {
     font-size: 1.2em;
   }
-  .langbut {
-    top: var(--padding);
-  }
-  .menubut {
-    bottom: var(--padding);
+  .videoContainer {
+    width: auto;
+    height: auto;
+    left: 0;
+    transform: none;
+    margin-bottom: 40px;
   }
 }

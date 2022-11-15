@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "author": "Farzad Golghasemi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farzadgo/RESTORE_"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,15 +15,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mapbox-gl": "^2.10.0",
     "next": "^11.1.4",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-map-gl": "^7.0.19",
+    "react-player": "^2.11.0",
+    "three": "^0.145.0"
   },
   "devDependencies": {
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
     "react-feather": "^2.0.9",
-    "three": "^0.139.0",
     "typescript": "^4.6.3"
   }
 }
