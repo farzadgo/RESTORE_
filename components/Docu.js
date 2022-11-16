@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLang } from '../components/Layout'
+import { langs, useLang } from '../components/Layout'
 import Paragraph from '../components/Paragraph'
 import ShiftImage from '../components/ShiftImage'
 import styles from '../styles/Docu.module.css'
@@ -18,6 +18,29 @@ const Docu = ({groupContent}) => {
   const [imageWidth, setImageWidth] = useState(0)
   const [imageHeight, setImageHeight] = useState(0)
   const [offset, setOffset] = useState(0)
+
+  const [credits, setCredits] = useState({
+    PHOTO: '',
+    VIDEO: '',
+    TECH: ''
+  })
+
+  const creditsData = {
+    en: {
+      PHOTO:'photo credits: <b> Jiye Lee </b>',
+      VIDEO: 'video: <b> Julija Paskeviciute </b>',
+      TECH: 'technical management: <b> Patrick Peljhan, Abdulghaffar Tammaa </b>'
+    },
+    de: {
+      PHOTO:'Bildnachweise: <b> Jiye Lee </b>',
+      VIDEO: 'Video: <b> Julija Paskeviciute </b>',
+      TECH: 'Technische Leitung: <b> Patrick Peljhan, Abdulghaffar Tammaa </b>'
+    }
+  }
+
+  const createMarkup = (string) => {
+    return {__html: string}
+  }
 
   const handleResize = () => {
     let width = window.innerWidth
@@ -47,6 +70,12 @@ const Docu = ({groupContent}) => {
   useEffect(() => {
     setGroupBody(groupContent.BODY.filter(e => e.lang === lang)[0].data)
 
+    if (lang === langs.en) {
+      setCredits({...credits, ...creditsData.en})
+    } else {
+      setCredits({...credits, ...creditsData.de})
+    }
+
     setWidth(window.innerWidth)
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -74,6 +103,11 @@ const Docu = ({groupContent}) => {
             screenWidth={width}
           />
         )}
+      </div>
+      <div className={styles.docuCredits}>
+        <p  dangerouslySetInnerHTML={createMarkup(credits.PHOTO)} />
+        <p  dangerouslySetInnerHTML={createMarkup(credits.VIDEO)} />
+        <p  dangerouslySetInnerHTML={createMarkup(credits.TECH)} />
       </div>
     </>
   )

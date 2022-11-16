@@ -8,6 +8,20 @@
   width: 100vw;
   padding: 0 var(--padding);
 }
+.docuCredits {
+  font-family: var(--sans-font);
+  font-weight: 300;
+  font-size: 1.3em;
+  margin-bottom: 60px;
+  margin-right: auto;
+  padding-left: var(--padding);
+}
+.docuCredits > p {
+  margin-bottom: 0.5em;
+}
+.docuCredits b {
+  font-weight: 500;
+}
 
 
 @media (max-width: 799px) {
@@ -22,5 +36,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .docuCredits {
+    font-size: 1.1em;
   }
 }
