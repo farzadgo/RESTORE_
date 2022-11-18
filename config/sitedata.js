@@ -8,10 +8,10 @@ module.exports = {
   author: 'hacer sitio corp.',
 
   links: {
-    openEN: 'https://cloud.disorient.xyz/s/nfiBGY7eEKFDkH4/download/RESTORE_EN_Open.pdf',
-    openDE: 'https://cloud.disorient.xyz/s/c7YM6k8isqSiDW4/download/RESTORE_DE_Open.pdf',
-    formEN: 'https://cloud.disorient.xyz/s/WXKZ834sGWMri4k/download/RESTORE_EN_Aplication_Form.pdf',
-    formDE: 'https://cloud.disorient.xyz/s/XByHtqiDo9CTcXx/download/RESTORE_DE_Formular.pdf'
+    openEN: 'https://github.com/farzadgo/RESTORE_/raw/main/public/forms/RESTORE_EN_Open.pdf',
+    openDE: 'https://github.com/farzadgo/RESTORE_/raw/main/public/forms/RESTORE_DE_Open.pdf',
+    formEN: 'https://github.com/farzadgo/RESTORE_/raw/main/public/forms/RESTORE_EN_Aplication_Form.pdf',
+    formDE: 'https://github.com/farzadgo/RESTORE_/raw/main/public/forms/RESTORE_DE_Formular.pdf'
   },
   
   // use Feather icon names
