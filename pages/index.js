@@ -148,7 +148,7 @@ const Home = () => {
       <section className={styles.intro}>
         <div className={styles.videoContainer} ref={videoContainerRef}>
           <ReactPlayer
-            url='https://cloud.disorient.xyz/s/iopbKjwGMbERYpY/download/restore_intro_short.mp4'
+            url='https://res.cloudinary.com/dd3tumnu6/video/upload/v1668796584/RESTORE_/restore_intro_short_hle1c4.mp4'
             width='100%'
             height='100%'
             // controls={true}
