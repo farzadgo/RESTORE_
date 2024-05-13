@@ -82,7 +82,7 @@ const Documentation = () => {
   const handleGoUp = () => window.scrollTo(0, 0)
 
   const handleScroll = () => {
-    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 700) {
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 1000) {
       setPageEnd(true)
     } else {
       setPageEnd(false)

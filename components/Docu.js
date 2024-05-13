@@ -3,20 +3,20 @@ import { langs, useLang } from '../components/Layout'
 import Paragraph from '../components/Paragraph'
 import ShiftImage from '../components/ShiftImage'
 import styles from '../styles/Docu.module.css'
+import useWindowSize from '../hooks/useWindowSize'
 
 
 const Docu = ({groupContent}) => {
 
   const {lang} = useLang()
-  const [width, setWidth] = useState()
+  const {width} = useWindowSize()
 
   const imageSlugs = groupContent.IMAGE_URIS
   const groupID = groupContent.ID
 
   const [groupBody, setGroupBody] = useState('')
 
-  const [imageWidth, setImageWidth] = useState(0)
-  const [imageHeight, setImageHeight] = useState(0)
+  const [imgSize, setImgSize] = useState(0)
   const [offset, setOffset] = useState(0)
 
   const [credits, setCredits] = useState({
@@ -42,29 +42,24 @@ const Docu = ({groupContent}) => {
     return {__html: string}
   }
 
-  const handleResize = () => {
-    let width = window.innerWidth
-    setWidth(width)
-    let imgWidth
+  useEffect(() => {
+    let imgWidth;
 
-    if (width > 1300) {
-      imgWidth = 1000
-      setOffset((width - imgWidth) * 0.6)
-    }
-    if (width > 800 && width < 1299) {
-      imgWidth = 790
-      setOffset((width - imgWidth) * 0.4)
-    }
-    if (width < 799) {
-      imgWidth = window.innerWidth - 20
-      // imgWidth = window.innerWidth
-      setOffset(0)
+    if (width < 800) {
+      imgWidth = window.innerWidth - 20;
+      setOffset(0);
+    } else {
+      if (width < 1300) {
+        imgWidth = 790;
+        setOffset((width - imgWidth) * 0.4);
+      } else {
+        imgWidth = 1000;
+        setOffset((width - imgWidth) * 0.6);
+      }
     }
 
-    setImageWidth(imgWidth)
-    setImageHeight(imgWidth * 0.666)
-    // setTextContainerWidth(imgWidth - 20)
-  }
+    setImgSize(imgWidth)
+  }, [width])
 
 
   useEffect(() => {
@@ -75,29 +70,20 @@ const Docu = ({groupContent}) => {
     } else {
       setCredits({...credits, ...creditsData.de})
     }
-
-    setWidth(window.innerWidth)
-    handleResize()
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
   }, [groupContent, lang])
 
 
   return (
     <>
       <div className={styles.docuParags}>
-        <Paragraph content={groupContent} body={groupBody} width={width}/>
+        <Paragraph content={groupContent} body={groupBody} />
       </div>
       <div className={styles.docuGallery}>
         {imageSlugs && imageSlugs.map(slug =>
           <ShiftImage
             key={slug}
             slug={slug}
-            imageWidth={imageWidth}
-            imageHeight={imageHeight}
+            imageSize={imgSize}
             groupID={groupID}
             offset={offset}
             screenWidth={width}

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import ReactPlayer from 'react-player'
 
-import { debounce } from '../config/helpers'
+import useWindowSize from '../hooks/useWindowSize'
 import modelimage from '../public/glass-body.png'
 
 import { langs, useLang } from '../components/Layout'
@@ -25,12 +25,10 @@ const Home = () => {
 
   const {lang, setLang} = useLang()
   const [toggle, setToggle] = useState(false)
+  const {desktop} = useWindowSize()
 
   const toggler = () => setToggle(prev => !prev)
   const langToggler = () => setLang(lang === langs.en ? langs.de : langs.en)
-
-  const [desktop, setDesktop] = useState(false)
-  const [width, setWidth] = useState(900)
 
   const [subtitles, setSubtitles] = useState({
     title: '',
@@ -73,32 +71,9 @@ const Home = () => {
     }
   }
 
-  const handleResize = debounce(() => {
-    setWidth(window.innerWidth)
-    if (window.innerWidth < 800) {
-      setDesktop(false)
-    } else {
-      setDesktop(true)
-    }
-  }, 1000)
-
-
   useEffect(() => {
     setSubtitles({...words.en})
     handleSubtitles()
-
-    if (window.innerWidth < 800) {
-      setDesktop(false)
-    } else {
-      setDesktop(true)
-    }
-
-    setWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
   }, [lang])
 
 
@@ -133,7 +108,7 @@ const Home = () => {
       <Buttons lang={lang} langs={langs} setLang={langToggler} setToggle={toggler} />
 
       <section className={styles.landing} id='landing'>
-        <div className={styles.landingtitles}>
+        <div data-test="landing-titles" className={styles.landingtitles}>
           <h1>RESTORE_</h1>
           <h2> {subtitles.title} </h2>
           <p> {subtitles.dates} </p>
@@ -158,7 +133,7 @@ const Home = () => {
             // onReady={e => console.log(e)}
           />
         </div>
-        <Paragraph content={''} body={subtitles.restore} width={width}/>
+        <Paragraph content={''} body={subtitles.restore}/>
         <Link href='/documentation'>
           <a>{subtitles.documentation}</a>
         </Link>

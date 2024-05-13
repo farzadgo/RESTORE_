@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { debounce } from '../config/helpers'
-
 import { langs, useLang } from '../components/Layout'
 import Menu from '../components/Menu'
 import Buttons from '../components/Buttons'
@@ -28,7 +26,6 @@ const Opencall = () => {
   const toggler = () => setToggle(prev => !prev)
   const langToggler = () => setLang(lang === langs.en ? langs.de : langs.en)
 
-  const [width, setWidth] = useState(900)
   const [opencall, setOpencall] = useState('')
 
   const [activeParag, setActiveParag] = useState('intro')
@@ -42,11 +39,6 @@ const Opencall = () => {
     en: 'Deadline: 21 April 2022',
     de: 'Bewerbungsfrist: 21 April 2022'
   }
-
-  const handleResize = debounce(() => {
-    setWidth(window.innerWidth)
-  }, 1000)
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,13 +54,6 @@ const Opencall = () => {
     } else {
       setDeadline(deadlineText.de)
     }
-
-    setWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
   }, [lang])
 
   return (
@@ -83,7 +68,7 @@ const Opencall = () => {
           <h3>{deadline}</h3>
         </div>
         <div className={styles.callParags}>
-          {opencall && opencall.map(e => <CallParagraph key={e.ID} content={e} width={width} activeParag={activeParag} setActive={setActive}/>)}
+          {opencall && opencall.map(e => <CallParagraph key={e.ID} content={e} activeParag={activeParag} setActive={setActive}/>)}
         </div>
       </section>
 

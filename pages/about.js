@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { debounce } from '../config/helpers'
-
 import { langs, useLang } from '../components/Layout'
 import Menu from '../components/Menu'
 import Buttons from '../components/Buttons'
@@ -17,12 +15,7 @@ const About = () => {
   const toggler = () => setToggle(prev => !prev)
   const langToggler = () => setLang(lang === langs.en ? langs.de : langs.en)
 
-  const [width, setWidth] = useState(900)
   const [about, setAbout] = useState('')
-
-  const handleResize = debounce(() => {
-    setWidth(window.innerWidth)
-  }, 1000)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,13 +25,7 @@ const About = () => {
       setAbout(content.filter(e => e.ID === 'about')[0].data)
     }
     fetchData()
-
-    setWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
+  
   }, [lang])
 
   return (
@@ -49,7 +36,7 @@ const About = () => {
       <Buttons lang={lang} langs={langs} setLang={langToggler} setToggle={toggler}/>
 
       <section className={styles.aboutParags}>
-        {about && about.map(e => <Paragraph content={e} body={e.BODY} width={width} key={e.ID}/>)}
+        {about && about.map(e => <Paragraph content={e} body={e.BODY} key={e.ID}/>)}
       </section>
 
     </div>

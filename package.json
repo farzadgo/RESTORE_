@@ -9,9 +9,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "cypress open"
   },
   "dependencies": {
     "mapbox-gl": "^2.10.0",
@@ -24,6 +25,7 @@
     "three": "^0.145.0"
   },
   "devDependencies": {
-    "typescript": "^4.6.3"
+    "cross-env": "^7.0.3",
+    "cypress": "^13.7.3"
   }
 }

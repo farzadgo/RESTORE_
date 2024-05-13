@@ -63,7 +63,7 @@
   display: flex;
   align-items: center;
   font-size: 2em;
-  margin-bottom: 15px;
+  margin-bottom: 0.6em;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -77,7 +77,8 @@
 .nav ul > div li:first-child {
   display: none;
 }
-.nav span {
+.nav ul > div li {
+  margin-bottom: 0.4em;
   cursor: pointer;
 }
 .nav .dlicon {

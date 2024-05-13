@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/Paragraph.module.css'
+import useWindowSize from '../hooks/useWindowSize'
 
-const Paragraph = ({content, body, width}) => {
+const Paragraph = ({content, body}) => {
 
   const [cardWidth, setCardWidth] = useState(20)
   const [position, setPosition] = useState(0)
+  const {width} = useWindowSize()
 
   const paragStyle = {
     width: cardWidth,

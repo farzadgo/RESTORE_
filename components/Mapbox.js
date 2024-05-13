@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { debounce } from '../config/helpers'
+import useWindowSize from '../hooks/useWindowSize'
 import Spinner from '../components/Spinner'
 import Image from 'next/image'
 
@@ -55,7 +55,7 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
 
   const mapRef = useRef()
 
-  const [width, setWidth] = useState(900)
+  const {width} = useWindowSize();
   const [smallScreen, setSmallScreen] = useState(false)
 
   const [mapDisplay, setMapDisplay] = useState(0)
@@ -127,11 +127,6 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
   //   // padding: '10px'
   // }
 
-
-  const handleResize = debounce(() => {
-    setWidth(window.innerWidth)
-  }, 1000)
-
   const handlePopupClick = () => {
     setSelectedDocu(selectedShop.ID)
   }
@@ -144,8 +139,6 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
 
 
   useEffect(() => {
-    setWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
     window.addEventListener('keydown', handleCloseSelected)
 
     if (width > 1900) {
@@ -162,7 +155,6 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
     }
 
     return () => {
-      window.removeEventListener('resize', handleResize)
       window.removeEventListener('keydown', handleCloseSelected)
     }
   }, [width])
