@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, memo } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import useWindowSize from '../hooks/useWindowSize'
@@ -54,9 +54,10 @@ import Image from 'next/image'
 const Mapbox = ({mapData, setSelectedDocu}) => {
 
   const mapRef = useRef()
+  const popupRef = useRef()
 
-  const {width} = useWindowSize();
-  const [smallScreen, setSmallScreen] = useState(false)
+  const mobileThreshold = 569
+  const {width} = useWindowSize()
 
   const [mapDisplay, setMapDisplay] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -73,36 +74,21 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
     zoom: 13.5,
   })
 
-  // const onMapLoad = event => { }
+  // const onMapLoad = (event) => {
+  //   // mapRef.current.on('move', () => {
+  //   //   // do something
+  //   // })
+  //   setLoading(false)
+  // }
+
   const onMapLoad = useCallback(() => {
-    // mapRef.current.on('move', () => {
-    //   // do something
-    // })
     setMapDisplay(1.0)
     setLoading(false)
   }, [])
 
-
-  const onPopLoad = event => {
-    const popTip = event.target._container.children[0]
-    if (smallScreen) {
-      popTip.style.display = 'none'
-    }
-    const popContainer = event.target._content
-    popContainer.addEventListener('click', handlePopupClick);
-    popContainer.style.borderRadius = 0
-    popContainer.style.padding = '3px'
-    popContainer.style.cursor = 'pointer'
-    popContainer.children[0].children[0].style.display = 'flex'
-  }
-
-  // const popImageStyle = {
-  //   width: smallScreen ? '290px' : '390px',
-  //   height: smallScreen ? '290px' : '390px'
-  // }
   const popImage = {
-    width: smallScreen ? 290 : 390,
-    height: smallScreen ? 290 : 390
+    width: width < mobileThreshold ? 290 : 420,
+    height: width < mobileThreshold ? 290 : 420
   }
 
   const mapContainerStyle = {
@@ -114,32 +100,47 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
     opacity: mapDisplay,
     transition: 'opacity 0.5s'
   }
+
   const markerBtnStyle = {
     background: 'none',
     border: 'none',
     cursor: 'pointer',
     transform: 'translate(-50%, 10%)'
   }
-  // const markerBtnImgStyle = {
-  //   width: '48px',
-  //   height: '48px',
-  //   // background: 'blue',
-  //   // padding: '10px'
-  // }
-
-  const handlePopupClick = () => {
-    setSelectedDocu(selectedShop.ID)
-  }
-
-  const handleCloseSelected = (e) => {
-    if (e.key === "Escape") {
-      setSelectedShop(null)
-    }
-  }
 
 
   useEffect(() => {
-    window.addEventListener('keydown', handleCloseSelected)
+
+    const handlePopupClick = () => {
+      setSelectedDocu(selectedShop.ID)
+    }
+
+    if (popupRef.current) {
+      let popBody = popupRef.current._content;
+      popBody.addEventListener('click', handlePopupClick);
+      popBody.style.borderRadius = 0
+      popBody.style.padding = '3px'
+      popBody.style.cursor = 'pointer'
+      popBody.children[0].children[0].style.display = 'flex'
+
+      let popTipStyle = popupRef.current._tip.style;
+      width < mobileThreshold ? popTipStyle.display = 'none' : popTipStyle.display = 'block'
+    }
+
+    return () => {
+      if (popupRef.current) {
+        let popup = popupRef.current._content;
+        if (popup) popup.removeEventListener('click', handlePopupClick)
+      }
+    }
+  }, [popupRef.current, selectedShop, width])
+
+
+  useEffect(() => {
+
+    const handleCloseSelected = (e) => {
+      if (e.key === "Escape") setSelectedShop(null)
+    }
 
     if (width > 1900) {
       setViewport({...viewport, zoom: 13.5})
@@ -149,11 +150,11 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
       setViewport({...viewport, zoom: 12.5})
     } else if (width < 899 && width > 570) {
       setViewport({...viewport, zoom: 12})
-    } else if (width < 569) {
+    } else {
       setViewport({...viewport, zoom: 11.7})
-      setSmallScreen(true)
     }
 
+    window.addEventListener('keydown', handleCloseSelected)
     return () => {
       window.removeEventListener('keydown', handleCloseSelected)
     }
@@ -169,15 +170,8 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
         {...viewport}
         style={mapContainerStyle}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        // mapStyle="mapbox://styles/mapbox/dark-v10"
         mapStyle="mapbox://styles/farzadgo/cl9y8dasd001q15p5wce2cjsu"
-        // initialViewState={{
-        //   latitude: 53.108,
-        //   longitude: 8.775,
-        //   scrollZoom: false,
-        //   dragPan: false,
-        //   zoom: 13.5
-        // }}
+        // initialViewState={}
         onViewportChange={setViewport}
         onLoad={onMapLoad}
       >
@@ -193,7 +187,8 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
               style={markerBtnStyle}
               onClick={(e) => {
                 e.preventDefault()
-                setSelectedShop(shop)
+                // setSelectedShop(shop)
+                shop.ID === selectedShop?.ID ? setSelectedShop(null) : setSelectedShop(shop)
               }}
             >
               <Image src='/pin-64-white.svg' alt='Icon' width={48} height={48}/>
@@ -201,33 +196,34 @@ const Mapbox = ({mapData, setSelectedDocu}) => {
           </Marker>
         ))}
   
-        {selectedShop ? (
+        {selectedShop && (
           <Popup
+            ref={popupRef}
             latitude={selectedShop.COORDINATES[0]}
-            longitude={smallScreen ? 8.745 : selectedShop.COORDINATES[1]}
+            longitude={width < mobileThreshold ? 8.777 : selectedShop.COORDINATES[1]}
             closeButton={false}
-            onOpen={onPopLoad}
+            closeOnClick={false}
+            // onOpen={} /* previously used for styling and add event listeners */
             onClose={() => {
               setSelectedShop(null);
             }}
-            maxWidth="400px" /* important */
+            maxWidth="500px" /* important */
+            anchor={selectedShop.ID === 'groepelingen' ? 'top' : 'bottom'}
+            offset={selectedShop.ID === 'groepelingen' ? [0, 0] : [0, -55]}
           >
             <Image
               src={`/cover-${selectedShop.ID}.png`}
               alt={`${selectedShop.AREA} Cover`}
-              unoptimized
+              // unoptimized
               width={popImage.width}
               height={popImage.height}
-              // width={400}
-              // height={400}
-              // style={popImageStyle}
             />
           </Popup>
-        ) : null}
+        )}
   
       </Map>
     </>
   )
 }
     
-export default Mapbox
+export default memo(Mapbox)

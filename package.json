@@ -9,23 +9,22 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "test": "cypress open"
   },
   "dependencies": {
-    "mapbox-gl": "^2.10.0",
-    "next": "^11.1.4",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "mapbox-gl": "^3.3.0",
+    "next": "^12.3.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-feather": "^2.0.10",
-    "react-map-gl": "^7.0.19",
-    "react-player": "^2.11.0",
+    "react-map-gl": "^7.1.7",
+    "react-player": "^2.16.0",
     "three": "^0.145.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
     "cypress": "^13.7.3"
   }
 }
